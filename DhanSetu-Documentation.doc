@@ -1,0 +1,207 @@
+DHANSETU - AI DEBT RECOVERY PLATFORM
+=====================================
+
+PROJECT OVERVIEW
+----------------
+
+DhanSetu is an AI-powered debt recovery platform designed specifically for Indian banks and financial institutions. It leverages advanced machine learning, natural language processing, and multi-channel communication to maximize recovery rates while ensuring full regulatory compliance with Reserve Bank of India (RBI) guidelines.
+
+
+THE PROBLEM
+-----------
+
+Indian banks face significant challenges in debt recovery:
+
+1. Rising NPAs (Non-Performing Assets) - India's banking sector has struggled with mounting bad loans
+2. Manual Processes - Traditional recovery methods are labor-intensive and inefficient
+3. Language Barriers - India has 23+ languages; generic messages have low engagement
+4. Regulatory Complexity - RBI guidelines are stringent; non-compliance leads to penalties
+5. Limited Personalization - One-size-fits-all approaches yield poor recovery rates
+6. Agent Productivity - Human agents can't scale to handle thousands of defaulters
+
+
+THE SOLUTION
+------------
+
+DhanSetu uses AI to automate and optimize the entire debt recovery workflow:
+
+- Intelligent Risk Scoring - XGBoost ML models predict default probability
+- Multi-Language Outreach - Messages in 23 Indian languages + dialects
+- Voice AI - TTS/STT for conversational recovery calls
+- Compliance Guard - Real-time RBI guideline monitoring
+- Campaign Optimization - AI suggests best channels, timing, and messaging
+- ROI Tracking - Measure recovery performance with detailed analytics
+
+
+KEY FEATURES
+------------
+
+1. COMMAND CENTER (DASHBOARD)
+   - Real-time KPI tracking (Total Portfolio, Recovery Rate, At-Risk Amount)
+   - Borrower ranking by risk and recoverability
+   - AI-powered recommendations
+   - Trend analysis with month-over-month comparisons
+
+2. AI RISK ENGINE
+   - XGBoost-powered risk scoring model
+   - 30/60/90-day default probability predictions
+   - Risk tier classification (Critical, High, Medium, Low)
+   - Best channel recommendations per borrower
+
+3. INSIGHTS HUB
+   - Uplift vs Risk Score Matrix - Visual segment analysis
+   - Fraud intent detection
+   - Channel performance heatmaps
+   - Optimal contact scheduling
+   - Early warning signals
+
+4. MESSAGE STUDIO
+   - 23 Indian Languages supported
+   - Tone Customization: Formal, Friendly, Empathetic, Urgent
+   - Channel Selection: WhatsApp, SMS, Voice Call, Email
+   - Preview with live rendering
+
+5. AI NEGOTIATION BOT
+   - Conversational AI powered by GPT-4
+   - Text-to-Speech (TTS) - Voice output in multiple languages
+   - Speech-to-Text (STT) - Voice input recognition
+   - Real-time negotiation with payment plan discussions
+
+6. CAMPAIGN BUILDER
+   - Visual step-by-step campaign creation
+   - Segment targeting (by risk, geography, product, DPD)
+   - Multi-channel delivery (WhatsApp, SMS, Call, Email)
+   - Scheduling with compliance-aware timing
+   - Live progress tracking
+
+7. RECOVERY TOOLKIT
+   - Promise-to-Pay (PTP) management
+   - Credit score simulation with improvement projections
+   - Gamification with DhanPoints rewards
+   - Milestone tracking and achievement badges
+   - Settlement calculators
+
+8. ANALYTICS & ROI
+   - Incremental recovery vs baseline comparison
+   - NPA reduction projections (12-month)
+   - Agent performance dashboards
+   - AI vs Human productivity analysis
+   - A/B testing for campaign variants
+
+9. COMPLIANCE CENTER
+   - RBI Compliance monitoring
+   - DLT (Distributed Ledger Technology) compliance
+   - Gender & regional fairness audits
+   - Communication logs with compliance scoring
+   - Auto-escalation for flagged accounts
+
+
+SUPPORTED LANGUAGES (23 INDIAN LANGUAGES)
+-----------------------------------------
+
+DhanSetu supports 23 Indian languages out of the box:
+
+- English (en-IN)
+- Hindi (hi-IN) - हिंदी
+- Bengali (bn-IN) - বাংলা
+- Telugu (te-IN) -తెలుగు
+- Marathi (mr-IN) - मराठी
+- Tamil (ta-IN) - தமிழ்
+- Gujarati (gu-IN) - ગુજરાતી
+- Kannada (kn-IN) - ಕನ್ನಡ
+- Malayalam (ml-IN) - മലയാളം
+- Punjabi (pa-IN) - ਪੰਜਾਬੀ
+- Odia (or-IN) - ଓଡ଼ିଆ
+- Urdu (ur-IN) - اردو
+- Assamese (as-IN) - অসমীয়া
+- Sindhi (sd-IN) - سنڌي
+- Konkani (kok) - कोंकणी
+- Sanskrit (sa-IN) - संस्कृतम्
+- Santali (sat) - ᱥᱟᱱᱛᱟᱲᱤ
+- Kashmiri (ksh) - کٲشُر
+- Manipuri (mni) - মৈতৈলোન
+- Dogri (dl) - डोगरी
+- Bodo (bxr) - बड़ो
+- Khasi (khg) - Khasi
+- Mizo (lus) - Mizo
+
+
+COMPLIANCE FEATURES
+-------------------
+
+RBI Guidelines Implemented:
+
+- Fair Practices Code compliance in all communications
+- Privacy Protection - No unauthorized data sharing
+- Gender Fairness - Equal treatment across demographics
+- Regional Equity - No geographic discrimination
+- DLT Compliance - Distributed Ledger Technology integration
+- Audit Logging - Complete communication trail
+
+
+TECHNOLOGY STACK
+----------------
+
+Frontend:     Next.js 16, React, TypeScript, Tailwind CSS
+AI/ML:        XGBoost, GPT-4, Rasa NLU
+Voice:        Web Speech API (TTS/STT)
+State:        React Context API
+Styling:      CSS Variables, Inline Styles
+Build:        Turbopack
+
+
+GETTING STARTED
+---------------
+
+Prerequisites:
+- Node.js 18+ 
+- npm or yarn
+
+Installation:
+
+1. Clone the repository
+   cd recover-ai
+
+2. Install dependencies
+   npm install
+
+3. Run development server
+   npm run dev
+
+Open http://localhost:3000 to view the application.
+
+
+DESIGN SYSTEM
+-------------
+
+Color Palette:
+- Primary: Teal (#0d9488)
+- Secondary: Green (#16a34a)
+- Accent: Gold (#f5c842)
+- Background: Warm Cream (#fdfbf7)
+- Text: Brown (#3d2e1f)
+
+Typography:
+- Headings: Space Grotesk
+- Body: Inter / Outfit
+
+
+PERFORMANCE METRICS
+-------------------
+
+The platform tracks:
+- Recovery Rate improvement
+- Cost per recovery
+- Agent productivity
+- Channel effectiveness
+- Customer satisfaction scores
+- Compliance violations
+
+
+ABOUT DHANSETU
+---------------
+
+DhanSetu - AI-Powered Debt Recovery for Indian Banks
+Powered by GPT-4 · XGBoost · Rasa NLU
+
+This is a proprietary software project for demonstration purposes.

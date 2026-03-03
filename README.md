@@ -1,36 +1,229 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DhanSetu - AI Debt Recovery Platform
 
-## Getting Started
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Next.js_16-black?style=for-the-badge&logo=next.js" alt="Next.js">
+  <img src="https://img.shields.io/badge/AI-XGBoost-blue?style=for-the-badge" alt="XGBoost">
+  <img src="https://img.shields.io/badge/Languages-23-orange?style=for-the-badge" alt="Languages">
+  <img src="https://img.shields.io/badge/Compliance-RBI-green?style=for-the-badge" alt="RBI Compliant">
+</p>
 
-First, run the development server:
+## 📋 Project Overview
+
+**DhanSetu** is an AI-powered debt recovery platform designed specifically for Indian banks and financial institutions. It leverages advanced machine learning, natural language processing, and multi-channel communication to maximize recovery rates while ensuring full regulatory compliance with Reserve Bank of India (RBI) guidelines.
+
+### The Problem
+
+Indian banks face significant challenges in debt recovery:
+
+1. **Rising NPAs (Non-Performing Assets)** - India's banking sector has struggled with mounting bad loans
+2. **Manual Processes** - Traditional recovery methods are labor-intensive and inefficient
+3. **Language Barriers** - India has 23+ languages; generic messages have low engagement
+4. **Regulatory Complexity** - RBI guidelines are stringent; non-compliance leads to penalties
+5. **Limited Personalization** - One-size-fits-all approaches yield poor recovery rates
+6. **Agent Productivity** - Human agents can't scale to handle thousands of defaulters
+
+### The Solution
+
+DhanSetu uses AI to automate and optimize the entire debt recovery workflow:
+- **Intelligent Risk Scoring** - XGBoost ML models predict default probability
+- **Multi-Language Outreach** - Messages in 23 Indian languages + dialects
+- **Voice AI** - TTS/STT for conversational recovery calls
+- **Compliance Guard** - Real-time RBI guideline monitoring
+- **Campaign Optimization** - AI suggests best channels, timing, and messaging
+- **ROI Tracking** - Measure recovery performance with detailed analytics
+
+---
+
+## 🎯 Key Features
+
+### 1. Command Center (Dashboard)
+- Real-time KPI tracking (Total Portfolio, Recovery Rate, At-Risk Amount)
+- Borrower ranking by risk and recoverability
+- AI-powered recommendations
+- Trend analysis with month-over-month comparisons
+
+### 2. AI Risk Engine
+- **XGBoost-powered** risk scoring model
+- 30/60/90-day default probability predictions
+- Risk tier classification (Critical, High, Medium, Low)
+- Best channel recommendations per borrower
+
+### 3. Insights Hub
+- **Uplift vs Risk Score Matrix** - Visual segment analysis
+- Fraud intent detection
+- Channel performance heatmaps
+- Optimal contact scheduling
+- Early warning signals
+
+### 4. Message Studio
+- **23 Indian Languages** supported:
+  - Hindi, Bengali, Telugu, Marathi, Tamil, Gujarati, Kannada, Malayalam, Punjabi, Oriya, Assamese, Nepali, Sanskrit, Urdu, Konkani, Sindhi, Bodo, Dogri, Santali, Kashmiri, Manipuri, Khasi, Mizo
+- **Tone Customization**: Formal, Friendly, Empathetic, Urgent
+- **Channel Selection**: WhatsApp, SMS, Voice Call, Email
+- Preview with live rendering
+
+### 5. AI Negotiation Bot
+- Conversational AI powered by GPT-4
+- **Text-to-Speech (TTS)** - Voice output in multiple languages
+- **Speech-to-Text (STT)** - Voice input recognition
+- Real-time negotiation with payment plan discussions
+- Maintains conversation context across interactions
+
+### 6. Campaign Builder
+- Visual step-by-step campaign creation
+- Segment targeting (by risk, geography, product, DPD)
+- Multi-channel delivery (WhatsApp, SMS, Call, Email)
+- Scheduling with compliance-aware timing
+- Live progress tracking
+
+### 7. Recovery Toolkit
+- **Promise-to-Pay (PTP)** management
+- Credit score simulation with improvement projections
+- Gamification with DhanPoints rewards
+- Milestone tracking and achievement badges
+- Settlement calculators
+
+### 8. Analytics & ROI
+- Incremental recovery vs baseline comparison
+- NPA reduction projections (12-month)
+- Agent performance dashboards
+- AI vs Human productivity analysis
+- A/B testing for campaign variants
+
+### 9. Compliance Center
+- **RBI Compliance** monitoring
+- DLT (Distributed Ledger Technology) compliance
+- Gender & regional fairness audits
+- Communication logs with compliance scoring
+- Auto-escalation for flagged accounts
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Next.js 16, React, TypeScript, Tailwind CSS |
+| **AI/ML** | XGBoost, GPT-4, Rasa NLU |
+| **Voice** | Web Speech API (TTS/STT) |
+| **State** | React Context API |
+| **Styling** | CSS Variables, Inline Styles |
+| **Build** | Turbopack |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
 
 ```bash
+# Clone the repository
+cd recover-ai
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📊 Sample Data
 
-## Learn More
+The platform includes 500+ sample borrower records with:
+- Customer demographics (name, ID, language, region)
+- Loan details (product, amount, DPD, overdue amount)
+- Risk scores (XGBoost-computed)
+- Best communication channels
+- Payment history
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Design System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Color Palette
+- **Primary**: Teal (`#0d9488`)
+- **Secondary**: Green (`#16a34a`)
+- **Accent**: Gold (`#f5c842`)
+- **Background**: Warm Cream (`#fdfbf7`)
+- **Text**: Brown (`#3d2e1f`)
 
-## Deploy on Vercel
+### Typography
+- **Headings**: Space Grotesk
+- **Body**: Inter / Outfit
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📱 Multi-Language Support
+
+DhanSetu supports **23 Indian languages** out of the box:
+
+| Code | Language | Native Name |
+|------|----------|-------------|
+| en-IN | English | English |
+| hi-IN | Hindi | हिंदी |
+| bn-IN | Bengali | বাংলা |
+| te-IN | Telugu | తెలుగు |
+| mr-IN | Marathi | मराठी |
+| ta-IN | Tamil | தமிழ் |
+| gu-IN | Gujarati | ગુજરાતી |
+| kn-IN | Kannada | ಕನ್ನಡ |
+| ml-IN | Malayalam | മലയാളം |
+| pa-IN | Punjabi | ਪੰਜਾਬੀ |
+| or-IN | Odia | ଓଡ଼ିଆ |
+| ur-IN | Urdu | اردو |
+| as-IN | Assamese | অসমীয়া |
+| sd-IN | Sindhi | سنڌي |
+| kok | Konkani | कोंकणी |
+| sa-IN | Sanskrit | संस्कृतम् |
+| sat | Santali | ᱥᱟᱱᱛᱟᱲᱤ |
+| ksh | Kashmiri | کٲشُر |
+| mni | Manipuri | মৈতৈলোন |
+| dl | Dograri | डोगरी |
+| bxr | Bodo | बड़ो |
+| khg | Khasi | Khasi |
+| lus | Mizo | Mizo |
+
+---
+
+## 📄 Compliance
+
+### RBI Guidelines Implemented
+- **Fair Practices Code** compliance in all communications
+- **Privacy Protection** - No unauthorized data sharing
+- **Gender Fairness** - Equal treatment across demographics
+- **Regional Equity** - No geographic discrimination
+- **DLT Compliance** - Distributed Ledger Technology integration
+- **Audit Logging** - Complete communication trail
+
+---
+
+## 📈 Performance Metrics
+
+The platform tracks:
+- Recovery Rate improvement
+- Cost per recovery
+- Agent productivity
+- Channel effectiveness
+- Customer satisfaction scores
+- Compliance violations
+
+---
+
+## 🤝 License
+
+This project is proprietary software for demonstration purposes.
+
+---
+
+<p align="center">
+  <strong>DhanSetu</strong> - AI-Powered Debt Recovery for Indian Banks<br>
+  Powered by GPT-4 · XGBoost · Rasa NLU
+</p>
