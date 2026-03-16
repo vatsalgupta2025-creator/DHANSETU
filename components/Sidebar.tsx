@@ -47,12 +47,20 @@ const NAV_ITEMS: NavItem[] = [
     { id: 'messages', labelKey: 'nav.messages', icon: <Icon d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />, group: 'ENGAGE' },
     { id: 'bot', labelKey: 'nav.bot', icon: <BotSvg />, badge: 'AI', badgeColor: '#22c55e', group: 'ENGAGE' },
     { id: 'campaigns', labelKey: 'nav.campaigns', icon: <Icon d="m3 11 19-9-9 19-2-8-8-2z" />, group: 'ENGAGE' },
+    { id: 'gandhigiri', labelKey: 'nav.gandhigiri', icon: <Icon d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />, badge: '🕊️', badgeColor: '#16a34a', group: 'ENGAGE' },
     { id: 'toolkit', labelKey: 'nav.toolkit', icon: <Icon d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />, badge: 'NEW', badgeColor: '#f59e0b', group: 'RECOVERY' },
     { id: 'analytics', labelKey: 'nav.analytics', icon: <Icon d="M3 3v18h18|M18 17V9|M13 17V5|M8 17v-3" />, group: 'RECOVERY' },
     { id: 'compliance', labelKey: 'nav.compliance', icon: <Icon d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />, badge: 'RBI', badgeColor: '#0d9488', group: 'RECOVERY' },
+    { id: 'escalation', labelKey: 'nav.escalation', icon: <Icon d="M13 17l5-5-5-5|M6 17l5-5-5-5" />, badge: 'NEW', badgeColor: '#ea580c', group: 'TOOLS' },
+    { id: 'bulk', labelKey: 'nav.bulk', icon: <Icon d="M9 11l3 3L22 4|M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />, badge: 'NEW', badgeColor: '#6366f1', group: 'TOOLS' },
+    { id: 'sentiment', labelKey: 'nav.sentiment', icon: <Icon d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z|M8 14s1.5 2 4 2 4-2 4-2|M9 9h.01|M15 9h.01" />, badge: 'AI', badgeColor: '#ec4899', group: 'TOOLS' },
+    { id: 'mlmodel', labelKey: 'nav.mlmodel', icon: <Icon d="M12 2L2 7l10 5 10-5-10-5z|M2 17l10 5 10-5|M2 12l10 5 10-5" />, badge: 'LIVE', badgeColor: '#16a34a', group: 'TOOLS' },
+    { id: 'leaderboard', labelKey: 'nav.leaderboard', icon: <Icon d="M6 9H4.5a2.5 2.5 0 0 1 0-5C6 4 6 9 6 9z|M18 9h1.5a2.5 2.5 0 0 0 0-5C18 4 18 9 18 9z|M4 22h16|M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22|M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22|M18 2H6v7a6 6 0 0 0 12 0V2z" />, badge: 'HOT', badgeColor: '#f59e0b', group: 'TOOLS' },
+    { id: 'cashflow', labelKey: 'nav.cashflow', icon: <Icon d="M8 2v4|M16 2v4|M3 10h18|M21 8v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1z" />, badge: 'NEW', badgeColor: '#2563eb', group: 'TOOLS' },
+    { id: 'reports', labelKey: 'nav.reports', icon: <Icon d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z|M14 2v6h6|M16 13H8|M16 17H8|M10 9H8" />, group: 'TOOLS' },
 ];
 
-const GROUPS: Record<string, string> = { CORE: 'AI ENGINE', ENGAGE: 'ENGAGE', RECOVERY: 'RECOVERY' };
+const GROUPS: Record<string, string> = { CORE: 'AI ENGINE', ENGAGE: 'ENGAGE', RECOVERY: 'RECOVERY', TOOLS: 'TOOLS & REPORTS' };
 
 export default function Sidebar() {
     const { activePage, setActivePage, loanData, selectedBank, appLanguage } = useApp();

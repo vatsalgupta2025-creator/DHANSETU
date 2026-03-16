@@ -194,12 +194,11 @@ export default function Dashboard() {
                     delta={{ val: '18.2%', positive: true }}
                 />
                 <StatCard
-                    title="Calculation Demo"
-                    value={(2 + 3 + 13).toString()}
-                    subtitle="2 + 3 + 13 = 18"
-                    icon={<svg viewBox="0 0 24 24" fill="none" stroke="#8b5a2b" strokeWidth="2" style={{ width: 20, height: 20 }}><rect x="4" y="2" width="16" height="20" rx="2" /><line x1="8" y1="6" x2="16" y2="6" /><line x1="8" y1="10" x2="16" y2="10" /><line x1="8" y1="14" x2="12" y2="14" /></svg>}
-                    color="#8b5a2b"
-                    delta={{ val: '100%', positive: true }}
+                    title={t('dash.highRiskAccounts', lang)}
+                    value={kpis.highCount.toLocaleString()}
+                    subtitle={`${Math.round(kpis.highCount / kpis.total * 100)}% of portfolio`}
+                    icon={<svg viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" style={{ width: 20, height: 20 }}><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>}
+                    color="#f97316"
                 />
             </div>
 

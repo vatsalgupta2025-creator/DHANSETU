@@ -202,9 +202,13 @@ export default function BankLogin({ bank, role, userName, onLogin, onBack }: Pro
                         width: 64, height: 64, borderRadius: '50%',
                         background: `linear-gradient(135deg, ${accentColor}, ${accent2})`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        margin: '0 auto 16px', fontSize: '1.8rem'
+                        margin: '0 auto 16px', padding: '12px',
+                        overflow: 'hidden',
                     }}>
-                        {forgotStep === 0 ? (bank?.logo || '🏦') : forgotStep === 1 ? '📧' : forgotStep === 2 ? '🔢' : '🔐'}
+                        {forgotStep === 0 ? (bank?.logo || <span style={{ fontSize: '1.8rem' }}>🏦</span>) :
+                            forgotStep === 1 ? <span style={{ fontSize: '1.8rem' }}>📧</span> :
+                                forgotStep === 2 ? <span style={{ fontSize: '1.8rem' }}>🔢</span> :
+                                    <span style={{ fontSize: '1.8rem' }}>🔐</span>}
                     </div>
                     <h2 style={{
                         fontFamily: 'Space Grotesk',

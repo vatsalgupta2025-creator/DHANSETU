@@ -1,12 +1,166 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+
+// ── Lightweight Shader Background for Loading Screen ──────────────────────────
+// A subtle, warm-toned WebGL shader that runs behind the existing loading content.
+// Rendered at low opacity to give a premium ambient glow without overpowering.
+
+const loadingShaderSource = `#version 300 es
+precision highp float;
+out vec4 O;
+uniform vec2 resolution;
+uniform float time;
+#define FC gl_FragCoord.xy
+#define T time
+#define R resolution
+#define MN min(R.x,R.y)
+float rnd(vec2 p) {
+  p=fract(p*vec2(12.9898,78.233));
+  p+=dot(p,p+34.56);
+  return fract(p.x*p.y);
+}
+float noise(in vec2 p) {
+  vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
+  float
+  a=rnd(i),
+  b=rnd(i+vec2(1,0)),
+  c=rnd(i+vec2(0,1)),
+  d=rnd(i+1.);
+  return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+}
+float fbm(vec2 p) {
+  float t=.0, a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
+  for (int i=0; i<5; i++) {
+    t+=a*noise(p);
+    p*=2.*m;
+    a*=.5;
+  }
+  return t;
+}
+float clouds(vec2 p) {
+  float d=1., t=.0;
+  for (float i=.0; i<3.; i++) {
+    float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
+    t=mix(t,d,a);
+    d=a;
+    p*=2./(i+1.);
+  }
+  return t;
+}
+void main(void) {
+  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
+  vec3 col=vec3(0);
+  float bg=clouds(vec2(st.x+T*.5,-st.y));
+  uv*=1.-.3*(sin(T*.2)*.5+.5);
+  for (float i=1.; i<12.; i++) {
+    uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
+    vec2 p=uv;
+    float d=length(p);
+    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
+    float b=noise(i+p+bg*1.731);
+    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
+    col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
+  }
+  O=vec4(col,1);
+}`;
+
+function useLoadingShader() {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const animFrameRef = useRef<number>(0);
+    const glRef = useRef<WebGL2RenderingContext | null>(null);
+    const programRef = useRef<WebGLProgram | null>(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const gl = canvas.getContext('webgl2');
+        if (!gl) return;
+        glRef.current = gl;
+
+        // Compile shader
+        const vertSrc = `#version 300 es
+precision highp float;
+in vec4 position;
+void main(){gl_Position=position;}`;
+
+        const vs = gl.createShader(gl.VERTEX_SHADER)!;
+        gl.shaderSource(vs, vertSrc);
+        gl.compileShader(vs);
+
+        const fs = gl.createShader(gl.FRAGMENT_SHADER)!;
+        gl.shaderSource(fs, loadingShaderSource);
+        gl.compileShader(fs);
+
+        if (!gl.getShaderParameter(fs, gl.COMPILE_STATUS)) {
+            console.error('Shader error:', gl.getShaderInfoLog(fs));
+            return;
+        }
+
+        const program = gl.createProgram()!;
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.error('Link error:', gl.getProgramInfoLog(program));
+            return;
+        }
+
+        programRef.current = program;
+
+        // Geometry
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, 1, -1, -1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+        const pos = gl.getAttribLocation(program, 'position');
+        gl.enableVertexAttribArray(pos);
+        gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+        // Uniform locations
+        const uRes = gl.getUniformLocation(program, 'resolution');
+        const uTime = gl.getUniformLocation(program, 'time');
+
+        // Resize
+        const resize = () => {
+            const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        };
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Render loop
+        const loop = (now: number) => {
+            gl.clearColor(0, 0, 0, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.useProgram(program);
+            gl.uniform2f(uRes, canvas.width, canvas.height);
+            gl.uniform1f(uTime, now * 1e-3);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            animFrameRef.current = requestAnimationFrame(loop);
+        };
+        loop(0);
+
+        return () => {
+            window.removeEventListener('resize', resize);
+            if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+            gl.deleteProgram(program);
+            gl.deleteShader(vs);
+            gl.deleteShader(fs);
+        };
+    }, []);
+
+    return canvasRef;
+}
 
 export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     const [progress, setProgress] = useState(0);
     const [phase, setPhase] = useState<'loading' | 'done'>('loading');
+    const shaderCanvasRef = useLoadingShader();
 
     useEffect(() => {
-        // Animate progress bar over 3 seconds
         const start = Date.now();
         const duration = 3000;
         const interval = setInterval(() => {
@@ -40,10 +194,34 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             opacity: phase === 'done' ? 0 : 1,
             transition: 'opacity 0.4s ease',
         }}>
+            {/* ── WebGL Shader Background ────────────────────────────────────────── */}
+            <canvas
+                ref={shaderCanvasRef}
+                style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    opacity: 0.55,
+                    mixBlendMode: 'overlay',
+                    pointerEvents: 'none',
+                }}
+            />
+            {/* Warm tint overlay to blend shader with cream theme */}
+            <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: `
+                    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(13,148,136,0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(245,200,66,0.10) 0%, transparent 70%)
+                `,
+                pointerEvents: 'none',
+            }} />
+
             {/* Animated background particles - using deterministic values to avoid hydration mismatch */}
             <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
                 {Array.from({ length: 20 }).map((_, i) => {
-                    // Pre-defined deterministic values based on index to avoid hydration mismatch
                     const sizes = [3.63, 2.68, 2.74, 1.17, 2.21, 4.43, 4.22, 3.16, 2.57, 1.09, 3.90, 1.50, 2.30, 3.58, 2.66, 2.78, 1.36, 2.25, 2.18, 1.97];
                     const heights = [4.62, 1.47, 3.06, 3.68, 1.13, 1.36, 3.59, 2.58, 1.07, 1.28, 2.05, 1.88, 2.25, 3.12, 1.20, 1.82, 2.56, 1.58, 2.36, 3.97];
                     const lefts = [0, 5.3, 10.6, 15.9, 21.2, 26.5, 31.8, 37.1, 42.4, 47.7, 53, 58.3, 63.6, 68.9, 74.2, 79.5, 84.8, 90.1, 95.4, 0.7];
@@ -72,6 +250,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 width: 200, height: 200,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 marginBottom: 40,
+                zIndex: 1,
             }}>
                 {/* Outer glow ring */}
                 <div style={{
@@ -153,7 +332,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             </div>
 
             {/* Brand name */}
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <div style={{ textAlign: 'center', marginBottom: 32, zIndex: 1 }}>
                 <div style={{
                     fontSize: '2.8rem',
                     fontWeight: 900,
@@ -179,7 +358,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             </div>
 
             {/* AI feature pills */}
-            <div style={{ display: 'flex', gap: 10, marginBottom: 36, flexWrap: 'wrap', justifyContent: 'center', maxWidth: 480 }}>
+            <div style={{ display: 'flex', gap: 10, marginBottom: 36, flexWrap: 'wrap', justifyContent: 'center', maxWidth: 480, zIndex: 1 }}>
                 {['🤖 XGBoost AI', '🌐 23 Languages', '🔊 TTS + STT', '📊 Real-time Analytics', '🛡️ RBI Compliant'].map((pill, i) => (
                     <div key={pill} style={{
                         padding: '5px 14px',
@@ -197,7 +376,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             </div>
 
             {/* Progress bar */}
-            <div style={{ width: 320, marginBottom: 16 }}>
+            <div style={{ width: 320, marginBottom: 16, zIndex: 1 }}>
                 <div style={{
                     height: 4, borderRadius: 999,
                     background: 'rgba(139, 90, 43, 0.10)',
@@ -223,7 +402,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             </div>
 
             {/* Powered by */}
-            <div style={{ fontSize: '0.65rem', color: '#b3a08a', marginTop: 8, letterSpacing: '0.1em' }}>
+            <div style={{ fontSize: '0.65rem', color: '#b3a08a', marginTop: 8, letterSpacing: '0.1em', zIndex: 1 }}>
                 POWERED BY GPT-4 · XGBOOST · RASA NLU
             </div>
 
