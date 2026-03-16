@@ -165,8 +165,6 @@ This is not just a feature — it's a **philosophy**. Gandhigiri Mode transforms
 | 🌍 **Sarvodaya** (Welfare of All) | Solutions that benefit both bank and borrower |
 | 🔥 **Tapasya** (Self-Discipline) | Encouraging small, consistent steps toward repayment |
 
-**✨ Celebrity Voice Cloning** — Messages delivered in cloned voices of iconic Indian personalities, making recovery outreach feel personal and culturally resonant.
-
 ---
 
 ### 📡 7. Campaign Builder — *Orchestrate at Scale*
@@ -243,8 +241,8 @@ This is not just a feature — it's a **philosophy**. Gandhigiri Mode transforms
 │                     AI / ML LAYER                         │
 │  ┌───────────┐  ┌──────────┐  ┌────────────────────┐    │
 │  │  XGBoost  │  │  GPT-4   │  │   Web Speech API   │    │
-│  │  Risk     │  │  NLU +   │  │   TTS + STT +      │    │
-│  │  Scoring  │  │  Rasa    │  │   Voice Cloning    │    │
+│  │  Risk     │  │  NLU +   │  │   TTS + STT        │    │
+│  │  Scoring  │  │  Rasa    │  │                    │    │
 │  └───────────┘  └──────────┘  └────────────────────┘    │
 ├──────────────────────────────────────────────────────────┤
 │                   DATA & COMPLIANCE                       │
@@ -316,7 +314,7 @@ DhanSetu's entire interface and message generation system supports all 23 schedu
 | **Styling** | Tailwind CSS 4 · CSS Variables · Framer Motion |
 | **Data Viz** | Recharts · Lucide React Icons |
 | **AI/ML** | XGBoost (Risk Scoring) · GPT-4 (NLU) · Rasa NLU |
-| **Voice** | Web Speech API (TTS/STT) · Celebrity Voice Cloning |
+| **Voice** | Web Speech API (TTS/STT) |
 | **State** | React Context API |
 | **Build** | Turbopack (Next.js 16) |
 | **Internals** | Dynamic Imports · Code Splitting · Lazy Loading |
@@ -441,7 +439,6 @@ recover-ai/
 ├── lib/
 │   ├── data.ts               # 500+ borrower records
 │   ├── i18n.ts               # 23-language translations (121KB!)
-│   ├── voices.ts             # Celebrity voice configurations
 │   └── context.tsx           # Global state management
 ├── public/                   # Static assets
 ├── package.json
