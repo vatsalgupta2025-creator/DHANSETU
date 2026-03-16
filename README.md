@@ -213,7 +213,7 @@ This is not just a feature — it's a **paradigm shift**. Gandhigiri Mode replac
 
 ---
 
-### 🌟 Bonus Modules
+### 🌟 Bonus Modules & Technical Feats
 
 | Module | Description |
 |:---|:---|
@@ -227,6 +227,9 @@ This is not just a feature — it's a **paradigm shift**. Gandhigiri Mode replac
 | 💭 **Sentiment Analyzer** | Gauge borrower sentiment from communication history |
 | 👤 **Customer 360°** | Complete borrower profile with interaction timeline |
 | 📤 **Export & Reports** | One-click PDF/Excel report generation |
+| 🔐 **Secure Bank Login** | Real-time API-driven OTP verification flow with dynamic UI |
+| 🎨 **Immersive WebGL UI** | Custom WebGL shader backgrounds providing a premium, ambient glow |
+| 🌍 **Universal Localization**| Live, context-aware translation of all 19 modules into 23 Indian languages |
 
 ---
 
