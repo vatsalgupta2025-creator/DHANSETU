@@ -153,17 +153,23 @@ India's banking sector holds over **₹4.2 Lakh Crore** in Non-Performing Assets
 
 ### 🕊️ 6. Gandhigiri Mode — *Recovery Through Compassion*
 
-> **🏆 Our Signature Innovation** — Inspired by Mahatma Gandhi's principles of non-violence and truth.
+> **🏆 Our Signature Innovation** — Transforming debt collection from a transaction into a human connection, inspired by Mahatma Gandhi's core philosophies.
 
-This is not just a feature — it's a **philosophy**. Gandhigiri Mode transforms aggressive debt collection into a compassionate dialogue guided by five Gandhian principles:
+This is not just a feature — it's a **paradigm shift**. Gandhigiri Mode replaces aggressive recovery tactics with an empathetic, personalized dialogue guided by six Gandhian principles. Our AI dynamically crafts messages in the borrower's native language based on these specific modes:
 
-| Principle | Approach |
-|:---|:---|
-| 🕉️ **Satya** (Truth) | Transparent communication about the borrower's situation |
-| ☮️ **Ahimsa** (Non-Violence) | No threats, no harassment — only understanding |
-| 🏛️ **Swaraj** (Self-Rule) | Empower borrowers to take control of their finances |
-| 🌍 **Sarvodaya** (Welfare of All) | Solutions that benefit both bank and borrower |
-| 🔥 **Tapasya** (Self-Discipline) | Encouraging small, consistent steps toward repayment |
+| Principle | Meaning | AI Approach & Strategy |
+|:---|:---|:---|
+| 🕉️ **Satya** | Truth | Transparent, honest communication about the exact debt situation. No hidden fees, no false legal threats. |
+| ☮️ **Ahimsa** | Non-Violence | Respectful, polite language that preserves the borrower's dignity and removes the fear of harassment. |
+| 🏛️ **Swaraj** | Self-Rule | Empowers the borrower with flexible, self-managed payment plans. Puts them back in control. |
+| 🌍 **Sarvodaya** | Welfare of All | Highlights how clearing the debt protects their family's financial future and community standing. |
+| 🔥 **Tapasya** | Discipline | Focuses on **Micro-Payments** (e.g., ₹50/day). Shows how small, consistent daily efforts lead to financial freedom. |
+| 📿 **Sadhana** | Practice | Gentle, consistent follow-ups. Regular reminders treated as a peaceful practice, not aggressive hounding. |
+
+**✨ Key Features of Gandhigiri Mode:**
+- **Dynamic Empathy Engine:** AI generates distinct, culturally-nuanced messages depending on the chosen principle (e.g., *a 'Tapasya' message focuses on small daily savings, while a 'Sarvodaya' message focuses on family welfare*).
+- **Interactive Impact Sliders:** Visualizes how micro-payments (customizable from ₹10-₹500/day) reduce the overall timeline and outstanding amount.
+- **Multilingual Resonance:** All Gandhian messages are natively generated in **12+ Indian languages** (Hindi, Bengali, Telugu, Marathi, Tamil, etc.), ensuring the emotional context is perfectly preserved in the borrower's mother tongue.
 
 ---
 
