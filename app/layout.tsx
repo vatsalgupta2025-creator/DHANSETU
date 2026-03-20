@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "DhanSetu — AI Debt Recovery & NPA Reduction Platform",
   description: "DhanSetu predicts loan defaults, generates personalized recovery messages in 10+ regional languages, and negotiates payment plans via AI — reducing NPAs by 40%.",
   keywords: "loan recovery, NPA, debt collection, AI banking, fintech, DhanSetu",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

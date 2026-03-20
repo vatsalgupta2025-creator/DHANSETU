@@ -72,56 +72,48 @@
   <div style="text-align:center;width:100%">
     <h2><span class="dot"></span>How DhanSetu Works</h2>
     <p class="subtitle">AI automates and optimizes the entire debt recovery workflow</p>
-    <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap: 20px; margin-top: 15px; align-items: stretch; text-align:left;">
-      
-      <!-- Left: Diagram -->
-      <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:10px; box-shadow:0 10px 30px rgba(0,0,0,0.5); overflow:hidden;">
-        <div class="mermaid" style="transform: scale(0.9); transform-origin: top center; width: 100%;">
-          %%{init: {
-            'theme': 'base', 
-            'themeVariables': { 
-              'primaryTextColor': '#fff', 
-              'lineColor': '#38bdf8', 
-              'fontFamily': 'Space Grotesk',
-              'edgeLabelBackground': '#0f172a'
-            }
-          }}%%
-          graph TD
-            classDef default fill:rgba(10,10,10,0.8),stroke:#4f46e5,stroke-width:2px,color:#fff,rx:12px,ry:12px;
-            classDef ai fill:rgba(139,92,246,0.15),stroke:#a855f7,stroke-width:2px,color:#fff;
-            classDef comms fill:rgba(239,68,68,0.15),stroke:#f43f5e,stroke-width:2px,color:#fff;
-            classDef bank fill:rgba(16,185,129,0.15),stroke:#34d399,stroke-width:2px,color:#fff;
-            classDef crit fill:rgba(245,158,11,0.15),stroke:#fbbf24,stroke-width:2px,color:#fff;
+    <div style="max-width:960px; margin:30px auto 0; display:flex; flex-direction:column; gap:16px;">
 
-            A[<b>🏦 Bank Core CRM</b><br/>Raw NPA Data]:::bank -->|API Sync| B{<b>🧠 AI Risk Engine</b><br/>XGBoost Propensity}:::ai
-            B -->|Score > 80| C[<b>⚡ Critical Escalation</b><br/>Immediate Handling]:::crit
-            B -->|Score < 80| D{<b>🤖 Sentiment AI</b>}:::ai
-            D --> E[<b>🌐 Core NLP Engine</b><br/>12 Native Dialects]:::ai
-            D --> F[<b>🕊️ Gandhigiri AI</b><br/>Empathy Scoring]:::ai
-            E --> G
-            F --> G[<b>💬 Twilio Hub</b><br/>WhatsApp / SMS]:::comms
-            G --> H{<b>📱 GPT-4 Negotiator</b><br/>Autonomous Bot}:::ai
-            H -->|Promise to Pay| I[<b>💳 Zero-Friction Pay</b>]:::bank
-            I --> J[<b>✅ DLT Audit Log</b>]:::bank
-        </div>
+      <!-- Phase 1 -->
+      <div class="glass" style="display:flex; align-items:center; border-left:6px solid var(--teal); padding:24px; text-align:left; transform: scale(0.98); transition: transform 0.3s; cursor:default;" onmouseover="this.style.transform='scale(1)'" onmouseout="this.style.transform='scale(0.98)'">
+         <div style="font-size:3.5rem; margin-right:30px; background:rgba(13,148,136,0.1); border-radius:16px; padding:15px; box-shadow:0 8px 24px rgba(13,148,136,0.2);">🏦</div>
+         <div style="flex:1">
+            <h3 style="color:var(--teal); font-size:1.5rem; margin-bottom:10px; letter-spacing:1px;">1. Data Ingestion & Risk Scoring</h3>
+            <p style="font-size:1.05rem; color:#fff; line-height:1.6; font-family: monospace; background:rgba(0,0,0,0.3); padding:8px 12px; border-radius:8px; display:inline-block; border:1px solid rgba(255,255,255,0.1)">
+              Bank CRM <span style="color:var(--teal)">➔</span> API Sync <span style="color:var(--teal)">➔</span> 🧠 XGBoost ML Engine
+            </p>
+            <p style="font-size:0.95rem; color:var(--muted); margin-top:12px; line-height:1.5;"><b>Advantage:</b> Proactively segments users into <i style="color:#ef4444">High Risk (Escalation)</i> vs <i style="color:#22c55e">Low Risk</i> immediately, eliminating the blind "call everyone" approach.</p>
+         </div>
       </div>
-      
-      <!-- Right: Explanations -->
-      <div style="display:flex; flex-direction:column; justify-content:space-evenly; text-align:left;">
-          <div class="glass" style="padding:16px; border-left:4px solid var(--purple)">
-              <h4 style="color:var(--purple); margin-bottom:6px; font-size:1rem;">1. Data & Predictability</h4>
-              <p style="font-size:0.8rem; color:#bbb; line-height:1.4;"><b>How it works:</b> Secure APIs pull core banking NPAs directly into our XGBoost ML pipeline.<br/><b style="color:#fff">Advantage:</b> Stops reactive collections by proactively identifying default likelihoods ahead of time, ensuring optimal target assignment.</p>
-          </div>
-          <div style="text-align:center; color:var(--purple); font-size:1.6rem; margin:-5px 0">⬇</div>
-          <div class="glass" style="padding:16px; border-left:4px solid var(--teal)">
-              <h4 style="color:var(--teal); margin-bottom:6px; font-size:1rem;">2. Empathy & Accessibility</h4>
-              <p style="font-size:0.8rem; color:#bbb; line-height:1.4;"><b>How it works:</b> AI orchestrator cross-matches the user to 1 of 12 native dialects and applies Gandhigiri Mode formatting.<br/><b style="color:#fff">Advantage:</b> Solves India's rural language barrier while replacing aggressive harassment with respect—increasing borrower engagement by 3x.</p>
-          </div>
-          <div style="text-align:center; color:var(--teal); font-size:1.6rem; margin:-5px 0">⬇</div>
-          <div class="glass" style="padding:16px; border-left:4px solid var(--gold)">
-              <h4 style="color:var(--gold); margin-bottom:6px; font-size:1rem;">3. Omnichannel Closure</h4>
-              <p style="font-size:0.8rem; color:#bbb; line-height:1.4;"><b>How it works:</b> GPT-4 handles SMS/WhatsApp negotiation dynamically, culminating in 1-click UPI/payment links.<br/><b style="color:#fff">Advantage:</b> 100% automated resolution cycle. A single digital system accomplishes the work of 1,000+ human calling agents, logged securely.</p>
-          </div>
+
+      <!-- Arrow -->
+      <div style="text-align:center; color:rgba(255,255,255,0.2); font-size:2.5rem; margin:-5px 0; animation: bounce 2s infinite;">⬇</div>
+
+      <!-- Phase 2 -->
+      <div class="glass" style="display:flex; align-items:center; border-left:6px solid var(--purple); padding:24px; text-align:left; transform: scale(0.98); transition: transform 0.3s; cursor:default;" onmouseover="this.style.transform='scale(1)'" onmouseout="this.style.transform='scale(0.98)'">
+         <div style="font-size:3.5rem; margin-right:30px; background:rgba(139,92,246,0.1); border-radius:16px; padding:15px; box-shadow:0 8px 24px rgba(139,92,246,0.2);">🤖</div>
+         <div style="flex:1">
+            <h3 style="color:var(--purple); font-size:1.5rem; margin-bottom:10px; letter-spacing:1px;">2. Empathy & Translation AI</h3>
+            <p style="font-size:1.05rem; color:#fff; line-height:1.6; font-family: monospace; background:rgba(0,0,0,0.3); padding:8px 12px; border-radius:8px; display:inline-block; border:1px solid rgba(255,255,255,0.1)">
+              Sentiment Orchestrator <span style="color:var(--purple)">➔</span> 🌐 NLP (12 Dialects) <span style="color:var(--purple)">➔</span> 🕊️ Gandhigiri Mode
+            </p>
+            <p style="font-size:0.95rem; color:var(--muted); margin-top:12px; line-height:1.5;"><b>Advantage:</b> Solves India's rural language barrier while replacing aggressive harassment with respect—increasing borrower engagement by <b>3x</b>.</p>
+         </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align:center; color:rgba(255,255,255,0.2); font-size:2.5rem; margin:-5px 0; animation: bounce 2s infinite;">⬇</div>
+
+      <!-- Phase 3 -->
+      <div class="glass" style="display:flex; align-items:center; border-left:6px solid var(--gold); padding:24px; text-align:left; transform: scale(0.98); transition: transform 0.3s; cursor:default;" onmouseover="this.style.transform='scale(1)'" onmouseout="this.style.transform='scale(0.98)'">
+         <div style="font-size:3.5rem; margin-right:30px; background:rgba(245,158,11,0.1); border-radius:16px; padding:15px; box-shadow:0 8px 24px rgba(245,158,11,0.2);">💳</div>
+         <div style="flex:1">
+            <h3 style="color:var(--gold); font-size:1.5rem; margin-bottom:10px; letter-spacing:1px;">3. Omnichannel Closure</h3>
+            <p style="font-size:1.05rem; color:#fff; line-height:1.6; font-family: monospace; background:rgba(0,0,0,0.3); padding:8px 12px; border-radius:8px; display:inline-block; border:1px solid rgba(255,255,255,0.1)">
+              💬 Twilio Pipeline <span style="color:var(--gold)">➔</span> 📱 GPT-4 Negotiator <span style="color:var(--gold)">➔</span> Zero-Friction Payment
+            </p>
+            <p style="font-size:0.95rem; color:var(--muted); margin-top:12px; line-height:1.5;"><b>Advantage:</b> 100% automated resolution cycle. A single digital system accomplishes the work of 1,000+ human calling agents effortlessly.</p>
+         </div>
       </div>
 
     </div>
