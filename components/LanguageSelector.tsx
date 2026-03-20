@@ -73,6 +73,16 @@ export const APP_LANGUAGES: AppLanguage[] = [
         greeting: 'دھن سیتو میں خوش آمدید', tagline: 'AI سے چلنے والا قرض وصولی پلیٹ فارم',
         selectBtn: 'اردو میں جاری رکھیں', flag: '🇮🇳', region: 'اتر پردیش',
     },
+    {
+        code: 'ne-IN', name: 'Nepali', nativeName: 'नेपाली',
+        greeting: 'धनसेतुमा स्वागत छ', tagline: 'AI-संचालित ऋण वसूली प्लेटफर्म',
+        selectBtn: 'नेपालीमा जारी राख्नुहोस्', flag: '🇮🇳', region: 'नेपाल',
+    },
+    {
+        code: 'bho-IN', name: 'Bhojpuri', nativeName: 'भोजपुरी',
+        greeting: 'धनसेतु में आपका स्वागत बा', tagline: 'AI-संचालित ऋण वसूली मंच',
+        selectBtn: 'भोजपुरी में जारी राखीं', flag: '🇮🇳', region: 'बिहार',
+    },
 ];
 
 interface LanguageSelectorProps {
