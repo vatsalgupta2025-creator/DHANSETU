@@ -72,8 +72,35 @@
   <div style="text-align:center;width:100%">
     <h2><span class="dot"></span>How DhanSetu Works</h2>
     <p class="subtitle">AI automates and optimizes the entire debt recovery workflow</p>
-    <div class="flow-container" style="margin:20px auto;max-width:1050px;height:550px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);overflow:hidden;box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-      <iframe src="https://agent-69bd710c57e55480--sage-bienenstitch-a0080a.netlify.app/pitch-flowchart" width="100%" height="100%" style="border:none;background:#000;"></iframe>
+    <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:10px; margin-top:20px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+      <div class="mermaid" style="display:flex; justify-content:center; zoom: 1.3;">
+        %%{init: {
+          'theme': 'base', 
+          'themeVariables': { 
+            'primaryTextColor': '#fff', 
+            'lineColor': '#38bdf8', 
+            'fontFamily': 'Space Grotesk',
+            'edgeLabelBackground': '#0f172a'
+          }
+        }}%%
+        graph TD
+          classDef default fill:rgba(10,10,10,0.8),stroke:#4f46e5,stroke-width:2px,color:#fff,rx:12px,ry:12px;
+          classDef ai fill:rgba(139,92,246,0.15),stroke:#a855f7,stroke-width:2px,color:#fff;
+          classDef comms fill:rgba(239,68,68,0.15),stroke:#f43f5e,stroke-width:2px,color:#fff;
+          classDef bank fill:rgba(16,185,129,0.15),stroke:#34d399,stroke-width:2px,color:#fff;
+          classDef crit fill:rgba(245,158,11,0.15),stroke:#fbbf24,stroke-width:2px,color:#fff;
+
+          A[<b>🏦 Bank Core CRM</b><br/>Raw NPA Portfolios]:::bank -->|API Sync| B{<b>🧠 AI Risk Engine</b><br/>XGBoost Propensity}:::ai
+          B -->|Score > 80| C[<b>⚡ Critical Escalation</b><br/>Immediate Handling]:::crit
+          B -->|Score < 80| D{<b>🤖 Sentiment Orchestrator</b>}:::ai
+          D --> E[<b>🌐 Core NLP Engine</b><br/>12 Native Dialects]:::ai
+          D --> F[<b>🕊️ Gandhigiri AI</b><br/>Empathy Scoring]:::ai
+          E --> G
+          F --> G[<b>💬 Twilio Hub</b><br/>WhatsApp / SMS Orchestration]:::comms
+          G --> H{<b>📱 GPT-4 Negotiator</b><br/>Autonomous Interactive Bot}:::ai
+          H -->|Promises to Pay| I[<b>💳 Zero-Friction Pay</b><br/>Automated UPI Links]:::bank
+          I --> J[<b>✅ DLT Audit Log</b><br/>Compliant System Closure]:::bank
+      </div>
     </div>
   </div>
   <span class="slide-num">04 / 12</span>
