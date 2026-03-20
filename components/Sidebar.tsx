@@ -55,7 +55,6 @@ const NAV_ITEMS: NavItem[] = [
     { id: 'bulk', labelKey: 'nav.bulk', icon: <Icon d="M9 11l3 3L22 4|M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />, badge: 'NEW', badgeColor: '#6366f1', group: 'TOOLS' },
     { id: 'sentiment', labelKey: 'nav.sentiment', icon: <Icon d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z|M8 14s1.5 2 4 2 4-2 4-2|M9 9h.01|M15 9h.01" />, badge: 'AI', badgeColor: '#ec4899', group: 'TOOLS' },
     { id: 'mlmodel', labelKey: 'nav.mlmodel', icon: <Icon d="M12 2L2 7l10 5 10-5-10-5z|M2 17l10 5 10-5|M2 12l10 5 10-5" />, badge: 'LIVE', badgeColor: '#16a34a', group: 'TOOLS' },
-    { id: 'leaderboard', labelKey: 'nav.leaderboard', icon: <Icon d="M6 9H4.5a2.5 2.5 0 0 1 0-5C6 4 6 9 6 9z|M18 9h1.5a2.5 2.5 0 0 0 0-5C18 4 18 9 18 9z|M4 22h16|M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22|M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22|M18 2H6v7a6 6 0 0 0 12 0V2z" />, badge: 'HOT', badgeColor: '#f59e0b', group: 'TOOLS' },
     { id: 'cashflow', labelKey: 'nav.cashflow', icon: <Icon d="M8 2v4|M16 2v4|M3 10h18|M21 8v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1z" />, badge: 'NEW', badgeColor: '#2563eb', group: 'TOOLS' },
     { id: 'reports', labelKey: 'nav.reports', icon: <Icon d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z|M14 2v6h6|M16 13H8|M16 17H8|M10 9H8" />, group: 'TOOLS' },
 ];
@@ -81,13 +80,14 @@ export default function Sidebar() {
 
     return (
         <aside style={{
-            width: collapsed ? 64 : 252,
+            width: collapsed ? 64 : 260,
             minHeight: '100vh',
-            background: 'rgba(253, 251, 247, 0.98)',
-            borderRight: '1px solid rgba(139, 90, 43, 0.12)',
+            background: 'var(--bg-surface)',
+            backdropFilter: 'blur(20px)',
+            borderRight: '1px solid var(--border)',
             display: 'flex',
             flexDirection: 'column',
-            transition: 'width 0.25s cubic-bezier(0.4,0,0.2,1)',
+            transition: 'width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
             overflow: 'hidden',
             flexShrink: 0,
             position: 'fixed',
@@ -96,8 +96,8 @@ export default function Sidebar() {
         }}>
             {/* Logo */}
             <div style={{
-                padding: collapsed ? '16px 14px' : '16px 16px',
-                borderBottom: '1px solid rgba(139, 90, 43, 0.12)',
+                padding: collapsed ? '16px 14px' : '16px 20px',
+                borderBottom: '1px solid var(--border)',
                 display: 'flex', alignItems: 'center',
                 justifyContent: collapsed ? 'center' : 'space-between', gap: 10,
                 background: `linear-gradient(135deg, ${accentColor}12, transparent)`,
@@ -114,10 +114,10 @@ export default function Sidebar() {
                             <span style={{ fontSize: '1.1rem', color: 'white', lineHeight: 1 }}>₹</span>
                         </div>
                         <div style={{ minWidth: 0 }}>
-                            <div style={{ fontFamily: 'Space Grotesk', fontWeight: 800, fontSize: '1.05rem', color: '#3d2b1f', lineHeight: 1.1 }}>
+                            <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 900, fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
                                 DhanSetu
                             </div>
-                            <div style={{ fontSize: '0.58rem', color: '#8b7355', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                            <div style={{ fontSize: '0.62rem', color: 'var(--text-secondary)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                                 AI RECOVERY
                             </div>
                         </div>
@@ -134,9 +134,9 @@ export default function Sidebar() {
                     </div>
                 )}
                 <button onClick={() => setCollapsed(!collapsed)}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#8b7355', padding: 4, borderRadius: 6, display: 'flex', alignItems: 'center', flexShrink: 0, transition: 'color 0.15s' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#5a3e28')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#8b7355')}>
+                    style={{ background: 'none', border: '1px solid var(--border)', cursor: 'pointer', color: 'var(--text-secondary)', padding: 6, borderRadius: 8, display: 'flex', alignItems: 'center', flexShrink: 0, transition: 'all 0.2s', backgroundColor: 'var(--bg-base)' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.borderColor = 'var(--border-glow)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'var(--border)'; }}>
                     <MenuSvg />
                 </button>
             </div>
@@ -181,11 +181,11 @@ export default function Sidebar() {
             )}
 
             {/* Nav */}
-            <nav style={{ flex: 1, padding: '8px 8px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto' }}>
+            <nav style={{ flex: 1, padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 2, overflowY: 'auto' }}>
                 {Object.entries(groupedItems).map(([group, items]) => (
-                    <div key={group}>
+                    <div key={group} style={{ marginBottom: 12 }}>
                         {!collapsed && (
-                            <div style={{ fontSize: '0.58rem', fontWeight: 700, color: '#8b7355', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '10px 8px 4px' }}>
+                            <div style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0px 10px 8px' }}>
                                 {GROUPS[group] || group}
                             </div>
                         )}
@@ -197,29 +197,46 @@ export default function Sidebar() {
                                     style={{
                                         width: '100%', border: 'none',
                                         justifyContent: collapsed ? 'center' : 'flex-start',
-                                        ...(isActive ? { color: accentColor, background: `${accentColor}18` } : {}),
+                                        ...(isActive ? { 
+                                            color: accentColor, 
+                                            background: `${accentColor}12`,
+                                            boxShadow: `inset 4px 0 0 ${accentColor}, 0 4px 12px ${accentColor}15`
+                                        } : { color: 'var(--text-secondary)' }),
                                     }}
                                     title={collapsed ? t(item.labelKey, lang as any) : undefined}>
-                                    {item.icon}
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22 }}>
+                                        {item.icon}
+                                    </div>
                                     {!collapsed && (
                                         <>
-                                            <span style={{ flex: 1, textAlign: 'left', fontSize: '0.83rem' }}>{t(item.labelKey, lang as any)}</span>
+                                            <span style={{ 
+                                                flex: 1, textAlign: 'left', 
+                                                fontSize: '0.86rem', 
+                                                fontWeight: isActive ? 700 : 500,
+                                                letterSpacing: '-0.01em',
+                                                transition: 'all 0.2s ease'
+                                            }}>{t(item.labelKey, lang as any)}</span>
                                             {item.badge && (
                                                 <span style={{
-                                                    background: `${item.badgeColor || accentColor}20`,
+                                                    background: isActive ? `${item.badgeColor || accentColor}25` : `${item.badgeColor || accentColor}15`,
                                                     color: item.badgeColor || accentColor,
-                                                    border: `1px solid ${(item.badgeColor || accentColor)}30`,
-                                                    borderRadius: 999, padding: '1px 7px',
-                                                    fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.04em',
+                                                    border: `1px solid ${item.badgeColor || accentColor}30`,
+                                                    borderRadius: 999, padding: '2px 8px',
+                                                    fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.04em',
+                                                    boxShadow: isActive ? `0 0 8px ${item.badgeColor || accentColor}30` : 'none'
                                                 }}>
                                                     {item.badge}
                                                 </span>
                                             )}
-                                            {isActive && <ChevronSvg />}
+                                            {isActive && (
+                                                <div style={{ color: accentColor, opacity: 0.8, display: 'flex', alignItems: 'center' }}>
+                                                    <ChevronSvg />
+                                                </div>
+                                            )}
                                         </>
                                     )}
                                     {collapsed && item.badge && (
-                                        <div style={{ position: 'absolute', top: 4, right: 4, width: 6, height: 6, borderRadius: '50%', background: item.badgeColor || accentColor }} />
+                                        <div style={{ position: 'absolute', top: 4, right: 4, width: 6, height: 6, borderRadius: '50%', background: item.badgeColor || accentColor, boxShadow: `0 0 6px ${item.badgeColor || accentColor}` }} />
                                     )}
                                 </button>
                             );
@@ -230,23 +247,25 @@ export default function Sidebar() {
 
             {/* Footer */}
             {!collapsed && (
-                <div style={{ padding: '10px 12px', borderTop: '1px solid rgba(139, 90, 43, 0.12)' }}>
-                    <div style={{ background: `${accentColor}12`, border: `1px solid ${accentColor}25`, borderRadius: 10, padding: '8px 10px', marginBottom: 10 }}>
-                        <div style={{ fontSize: '0.67rem', fontWeight: 700, color: accentColor, marginBottom: 2 }}>💡 AI Insight</div>
-                        <div style={{ fontSize: '0.63rem', color: '#8b7355', lineHeight: 1.4 }}>
-                            Best window: <strong style={{ color: '#3d2b1f' }}>Mon–Wed, 2–4 PM</strong>
+                <div style={{ padding: '16px 16px', borderTop: '1px solid var(--border)' }}>
+                    <div style={{ background: `var(--bank-accent-light)`, border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '12px 14px', marginBottom: 16 }}>
+                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: accentColor, marginBottom: 4 }}>💡 AI Insight</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                            Best window: <strong style={{ color: 'var(--text-primary)' }}>Mon–Wed, 2–4 PM</strong>
                         </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div className="hover-lift" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: 8, cursor: 'pointer', borderRadius: 12, border: '1px solid transparent', transition: 'all 0.2s' }}
+                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'var(--bg-base)'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'transparent'; }}>
                         <div style={{
-                            width: 30, height: 30, borderRadius: '50%',
+                            width: 36, height: 36, borderRadius: '50%',
                             background: `linear-gradient(135deg, ${accentColor}, ${accent2})`,
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontSize: '0.72rem', fontWeight: 700, color: 'white', flexShrink: 0,
+                            fontSize: '0.85rem', fontWeight: 800, color: 'white', flexShrink: 0,
                         }}>AM</div>
                         <div>
-                            <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#3d2b1f' }}>Admin User</div>
-                            <div style={{ fontSize: '0.63rem', color: '#8b7355' }}>Recovery Manager</div>
+                            <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>Admin User</div>
+                            <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', fontWeight: 500 }}>Recovery Manager</div>
                         </div>
                     </div>
                 </div>

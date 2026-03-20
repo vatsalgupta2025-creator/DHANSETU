@@ -107,11 +107,11 @@ export default function MLModelDashboard() {
         <div style={{ padding: '28px 32px', maxWidth: 1360, margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
                 <div>
-                    <h1 style={{ fontFamily: 'Space Grotesk', fontSize: '1.7rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>🧠 ML Model Dashboard</h1>
-                    <p style={{ color: '#64748b', fontSize: '0.88rem', marginTop: 6 }}>XGBoost risk model performance, monitoring, and live scoring</p>
+                    <h1 style={{ fontFamily: 'Space Grotesk', fontSize: '1.7rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>🧠 ML Model Dashboard</h1>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginTop: 6 }}>XGBoost risk model performance, monitoring, and live scoring</p>
                 </div>
                 <button onClick={() => setShowComparison(!showComparison)}
-                    style={{ padding: '7px 16px', borderRadius: 8, border: `1px solid ${showComparison ? accent : '#e2e8f0'}`, background: showComparison ? `${accent}10` : 'white', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600, color: showComparison ? accent : '#64748b' }}>
+                    style={{ padding: '7px 16px', borderRadius: 8, border: `1px solid var(--border)`, background: showComparison ? `${accent}10` : 'white', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600, color: showComparison ? accent : '#64748b' }}>
                     {showComparison ? '✓ Comparing v3.1' : '⚖️ Compare v3.1'}
                 </button>
             </div>
@@ -120,10 +120,10 @@ export default function MLModelDashboard() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 16, marginBottom: 24 }}>
                 <div style={{ background: `linear-gradient(135deg, ${accent}10, ${accent}05)`, borderRadius: 14, padding: '16px 20px', border: `1px solid ${accent}25`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
                     <div style={{ display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap' }}>
-                        <div><span style={{ fontSize: '0.65rem', color: '#64748b' }}>Model</span><div style={{ fontWeight: 800, color: '#0f172a', fontFamily: 'Space Grotesk' }}>XGBoost v3.2</div></div>
-                        <div><span style={{ fontSize: '0.65rem', color: '#64748b' }}>Training Data</span><div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.85rem' }}>125,000 records</div></div>
-                        <div><span style={{ fontSize: '0.65rem', color: '#64748b' }}>Last Trained</span><div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.85rem' }}>Feb 28, 2025</div></div>
-                        <div><span style={{ fontSize: '0.65rem', color: '#64748b' }}>Features</span><div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.85rem' }}>24 features</div></div>
+                        <div><span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Model</span><div style={{ fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'Space Grotesk' }}>XGBoost v3.2</div></div>
+                        <div><span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Training Data</span><div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.85rem' }}>125,000 records</div></div>
+                        <div><span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Last Trained</span><div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.85rem' }}>Feb 28, 2025</div></div>
+                        <div><span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Features</span><div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.85rem' }}>24 features</div></div>
                     </div>
                     <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '6px 14px', display: 'flex', alignItems: 'center', gap: 6 }}>
                         <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#16a34a', animation: 'pulseDot 2s infinite' }} />
@@ -135,10 +135,10 @@ export default function MLModelDashboard() {
                     {healthChecks.map(h => {
                         const ok = h.invert ? h.value < h.threshold : h.value >= h.threshold;
                         return (
-                            <div key={h.label} style={{ background: 'white', borderRadius: 12, padding: '10px 14px', border: '1px solid #e2e8f0', textAlign: 'center', minWidth: 80 }}>
+                            <div key={h.label} style={{ background: 'var(--bg-surface)', borderRadius: 12, padding: '10px 14px', border: '1px solid var(--border)', textAlign: 'center', minWidth: 80 }}>
                                 <div style={{ width: 10, height: 10, borderRadius: '50%', background: ok ? '#16a34a' : '#dc2626', margin: '0 auto 4px', animation: ok ? 'none' : 'pulseDot 1.5s infinite' }} />
                                 <div style={{ fontSize: '0.95rem', fontWeight: 800, color: ok ? '#16a34a' : '#dc2626', fontFamily: 'Space Grotesk' }}>{typeof h.value === 'number' && h.value < 1 ? h.value.toFixed(3) : h.value}{h.unit}</div>
-                                <div style={{ fontSize: '0.58rem', color: '#94a3b8', fontWeight: 600 }}>{h.label}</div>
+                                <div style={{ fontSize: '0.58rem', color: 'var(--text-secondary)', fontWeight: 600 }}>{h.label}</div>
                             </div>
                         );
                     })}
@@ -146,8 +146,8 @@ export default function MLModelDashboard() {
             </div>
 
             {/* Retraining Pipeline */}
-            <div style={{ background: 'white', borderRadius: 14, border: '1px solid #e2e8f0', padding: '14px 20px', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 0 }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#0f172a', marginRight: 16, flexShrink: 0 }}>Retrain Pipeline:</div>
+            <div style={{ background: 'var(--bg-surface)', borderRadius: 14, border: '1px solid var(--border)', padding: '14px 20px', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 0 }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)', marginRight: 16, flexShrink: 0 }}>Retrain Pipeline:</div>
                 {RETRAIN_STAGES.map((s, i) => (
                     <React.Fragment key={s.name}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1 }}>
@@ -176,7 +176,7 @@ export default function MLModelDashboard() {
             {tab === 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
                     {/* Metrics */}
-                    <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', padding: 20 }}>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', padding: 20 }}>
                         <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: 16 }}>Performance Metrics {showComparison && '(v3.2 vs v3.1)'}</div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                             {Object.entries(METRICS).map(([k, v]) => {
@@ -184,7 +184,7 @@ export default function MLModelDashboard() {
                                 const improved = typeof v === 'number' && typeof prev === 'number' && (k === 'logLoss' ? v < prev : v > prev);
                                 return (
                                     <div key={k} style={{ background: '#f8fafc', borderRadius: 12, padding: '14px 16px' }}>
-                                        <div style={{ fontSize: '0.65rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>{k.replace(/([A-Z])/g, ' $1')}</div>
+                                        <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: 600 }}>{k.replace(/([A-Z])/g, ' $1')}</div>
                                         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 4 }}>
                                             <span style={{ fontSize: '1.3rem', fontWeight: 800, color: v > 90 || (typeof v === 'number' && v < 1 && v > 0.9) ? '#16a34a' : v > 80 ? accent : '#f59e0b', fontFamily: 'Space Grotesk' }}>
                                                 {typeof v === 'number' && v < 1 ? v.toFixed(3) : `${v}%`}
@@ -201,27 +201,27 @@ export default function MLModelDashboard() {
                         </div>
                     </div>
                     {/* Confusion Matrix */}
-                    <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', padding: 20 }}>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', padding: 20 }}>
                         <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: 16 }}>Confusion Matrix</div>
                         <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr 1fr', gridTemplateRows: '30px 1fr 1fr', gap: 6 }}>
-                            <div /><div style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: 700, color: '#64748b' }}>Pred Positive</div><div style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: 700, color: '#64748b' }}>Pred Negative</div>
-                            <div style={{ display: 'flex', alignItems: 'center', fontSize: '0.65rem', fontWeight: 700, color: '#64748b' }}>Act Positive</div>
+                            <div /><div style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-secondary)' }}>Pred Positive</div><div style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-secondary)' }}>Pred Negative</div>
+                            <div style={{ display: 'flex', alignItems: 'center', fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-secondary)' }}>Act Positive</div>
                             <div style={{ background: '#dcfce7', borderRadius: 12, padding: 18, textAlign: 'center' }}>
                                 <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#16a34a', fontFamily: 'Space Grotesk' }}>{confusion.tp}</div>
-                                <div style={{ fontSize: '0.58rem', color: '#64748b' }}>True Positive</div>
+                                <div style={{ fontSize: '0.58rem', color: 'var(--text-secondary)' }}>True Positive</div>
                             </div>
                             <div style={{ background: '#fef2f2', borderRadius: 12, padding: 18, textAlign: 'center' }}>
                                 <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#dc2626', fontFamily: 'Space Grotesk' }}>{confusion.fn}</div>
-                                <div style={{ fontSize: '0.58rem', color: '#64748b' }}>False Negative</div>
+                                <div style={{ fontSize: '0.58rem', color: 'var(--text-secondary)' }}>False Negative</div>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', fontSize: '0.65rem', fontWeight: 700, color: '#64748b' }}>Act Negative</div>
+                            <div style={{ display: 'flex', alignItems: 'center', fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-secondary)' }}>Act Negative</div>
                             <div style={{ background: '#fef2f2', borderRadius: 12, padding: 18, textAlign: 'center' }}>
                                 <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#dc2626', fontFamily: 'Space Grotesk' }}>{confusion.fp}</div>
-                                <div style={{ fontSize: '0.58rem', color: '#64748b' }}>False Positive</div>
+                                <div style={{ fontSize: '0.58rem', color: 'var(--text-secondary)' }}>False Positive</div>
                             </div>
                             <div style={{ background: '#dcfce7', borderRadius: 12, padding: 18, textAlign: 'center' }}>
                                 <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#16a34a', fontFamily: 'Space Grotesk' }}>{confusion.tn}</div>
-                                <div style={{ fontSize: '0.58rem', color: '#64748b' }}>True Negative</div>
+                                <div style={{ fontSize: '0.58rem', color: 'var(--text-secondary)' }}>True Negative</div>
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@ export default function MLModelDashboard() {
             )}
 
             {tab === 1 && (
-                <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', padding: 20 }}>
+                <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', padding: 20 }}>
                     <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: 16 }}>Feature Importance (SHAP Values) {showComparison && '— v3.2 vs v3.1'}</div>
                     <ResponsiveContainer width="100%" height={380}>
                         <BarChart data={featureImportance} layout="vertical" margin={{ left: 140 }}>
@@ -245,7 +245,7 @@ export default function MLModelDashboard() {
             )}
 
             {tab === 2 && (
-                <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', padding: 20 }}>
+                <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', padding: 20 }}>
                     <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: 16 }}>Model Drift Monitoring (PSI & Accuracy)</div>
                     <ResponsiveContainer width="100%" height={320}>
                         <AreaChart data={driftData}>
@@ -266,14 +266,14 @@ export default function MLModelDashboard() {
             )}
 
             {tab === 3 && (
-                <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-                    <div style={{ padding: '16px 20px', borderBottom: '1px solid #f1f5f9', fontWeight: 700, fontSize: '0.9rem' }}>Prediction Accuracy by Risk Tier</div>
+                <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', overflow: 'hidden' }}>
+                    <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border)', fontWeight: 700, fontSize: '0.9rem' }}>Prediction Accuracy by Risk Tier</div>
                     <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
                         <thead><tr style={{ background: '#f8fafc' }}>
-                            {['Risk Tier', 'Predicted', 'Actual', 'Accuracy', 'Performance'].map(h => <th key={h} style={{ padding: '12px 20px', textAlign: 'left', fontWeight: 700, color: '#475569', borderBottom: '1px solid #e2e8f0' }}>{h}</th>)}
+                            {['Risk Tier', 'Predicted', 'Actual', 'Accuracy', 'Performance'].map(h => <th key={h} style={{ padding: '12px 20px', textAlign: 'left', fontWeight: 700, color: '#475569', borderBottom: '1px solid var(--border)' }}>{h}</th>)}
                         </tr></thead>
                         <tbody>{tierAccuracy.map(t => (
-                            <tr key={t.tier} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                            <tr key={t.tier} style={{ borderBottom: '1px solid var(--border)' }}>
                                 <td style={{ padding: '14px 20px' }}><span style={{ padding: '3px 10px', borderRadius: 6, fontWeight: 700, fontSize: '0.75rem', background: `${t.color}12`, color: t.color }}>{t.tier}</span></td>
                                 <td style={{ padding: '14px 20px', fontWeight: 600 }}>{t.predicted}</td>
                                 <td style={{ padding: '14px 20px', fontWeight: 600 }}>{t.actual}</td>
@@ -286,7 +286,7 @@ export default function MLModelDashboard() {
             )}
 
             {tab === 4 && (
-                <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', padding: 20 }}>
+                <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', padding: 20 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                         <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>ROC Curve — Receiver Operating Characteristic</div>
                         <div style={{ background: `${accent}10`, border: `1px solid ${accent}30`, borderRadius: 8, padding: '6px 14px', fontWeight: 800, fontSize: '0.85rem', color: accent, fontFamily: 'Space Grotesk' }}>
@@ -309,9 +309,9 @@ export default function MLModelDashboard() {
             {tab === 5 && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
                     {/* Input */}
-                    <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', padding: 24 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a', marginBottom: 4 }}>🎮 Live Scoring Simulator</div>
-                        <div style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: 20 }}>Adjust borrower parameters to see predicted risk score in real-time</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', padding: 24 }}>
+                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: 4 }}>🎮 Live Scoring Simulator</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: 20 }}>Adjust borrower parameters to see predicted risk score in real-time</div>
                         {[
                             { label: 'Days Past Due (DPD)', value: simDpd, set: setSimDpd, min: 0, max: 180, color: simDpd > 60 ? '#dc2626' : simDpd > 30 ? '#f59e0b' : '#16a34a' },
                             { label: 'Credit Score (CIBIL)', value: simCredit, set: setSimCredit, min: 300, max: 850, color: simCredit > 700 ? '#16a34a' : simCredit > 550 ? '#f59e0b' : '#dc2626' },
@@ -335,9 +335,9 @@ export default function MLModelDashboard() {
                         </button>
                     </div>
                     {/* Result */}
-                    <div style={{ background: 'white', borderRadius: 16, border: '1px solid #e2e8f0', padding: 24 }}>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, border: '1px solid var(--border)', padding: 24 }}>
                         {!simResult && !simScoring ? (
-                            <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+                            <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--text-secondary)' }}>
                                 <div style={{ fontSize: '3rem', marginBottom: 12 }}>🎯</div>
                                 <div style={{ fontSize: '0.95rem', fontWeight: 600 }}>Adjust parameters and run prediction</div>
                                 <div style={{ fontSize: '0.78rem', marginTop: 6 }}>The XGBoost model will calculate a risk score based on the input features</div>
@@ -345,7 +345,7 @@ export default function MLModelDashboard() {
                         ) : simScoring ? (
                             <div style={{ textAlign: 'center', padding: '60px 20px' }}>
                                 <div style={{ fontSize: '3rem', marginBottom: 12, animation: 'pulse 1s infinite' }}>🧠</div>
-                                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Running XGBoost Model...</div>
+                                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)' }}>Running XGBoost Model...</div>
                                 <div style={{ width: '60%', height: 6, borderRadius: 3, background: '#f1f5f9', margin: '16px auto', overflow: 'hidden' }}>
                                     <div style={{ width: '100%', height: '100%', background: accent, animation: 'shimmer 1.2s infinite' }} />
                                 </div>
@@ -354,14 +354,14 @@ export default function MLModelDashboard() {
                             <div style={{ animation: 'fadeIn 0.4s ease' }}>
                                 <div style={{ textAlign: 'center', marginBottom: 20 }}>
                                     <div style={{ fontSize: '3.5rem', fontWeight: 800, color: simResult.score >= 80 ? '#dc2626' : simResult.score >= 60 ? '#f59e0b' : simResult.score >= 35 ? '#2563eb' : '#16a34a', fontFamily: 'Space Grotesk' }}>{simResult.score}</div>
-                                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0f172a' }}>Risk Score</div>
+                                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>Risk Score</div>
                                     <span style={{
                                         display: 'inline-block', marginTop: 8, padding: '4px 16px', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem',
                                         background: simResult.tier === 'Critical' ? '#fef2f2' : simResult.tier === 'High' ? '#fef3c7' : simResult.tier === 'Medium' ? '#dbeafe' : '#dcfce7',
                                         color: simResult.tier === 'Critical' ? '#dc2626' : simResult.tier === 'High' ? '#d97706' : simResult.tier === 'Medium' ? '#2563eb' : '#16a34a',
                                     }}>{simResult.tier} Risk</span>
                                 </div>
-                                <div style={{ fontWeight: 700, fontSize: '0.82rem', color: '#0f172a', marginBottom: 12 }}>Default Probability Forecast</div>
+                                <div style={{ fontWeight: 700, fontSize: '0.82rem', color: 'var(--text-primary)', marginBottom: 12 }}>Default Probability Forecast</div>
                                 {[
                                     { label: '30-Day Default', prob: simResult.prob30 },
                                     { label: '60-Day Default', prob: simResult.prob60 },
@@ -369,7 +369,7 @@ export default function MLModelDashboard() {
                                 ].map(f => (
                                     <div key={f.label} style={{ marginBottom: 10 }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', marginBottom: 4 }}>
-                                            <span style={{ color: '#64748b', fontWeight: 600 }}>{f.label}</span>
+                                            <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>{f.label}</span>
                                             <span style={{ fontWeight: 800, color: f.prob > 70 ? '#dc2626' : f.prob > 40 ? '#f59e0b' : '#16a34a', fontFamily: 'Space Grotesk' }}>{f.prob.toFixed(1)}%</span>
                                         </div>
                                         <div style={{ width: '100%', height: 8, borderRadius: 4, background: '#f1f5f9' }}>

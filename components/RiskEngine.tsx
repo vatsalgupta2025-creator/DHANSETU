@@ -211,7 +211,10 @@ export default function RiskEngine() {
                     <tbody>
                         {paginated.map(r => (
                             <React.Fragment key={r.customer.id}>
-                                <tr style={{ cursor: 'pointer' }} onClick={() => setExpanded(expanded === r.customer.id ? null : r.customer.id)}>
+                                <tr style={{ cursor: 'pointer', borderBottom: '1px solid var(--border)', background: expanded === r.customer.id ? 'var(--bg-elevated)' : 'transparent', transition: 'all 0.2s ease' }} 
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-elevated)'}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = expanded === r.customer.id ? 'var(--bg-elevated)' : 'transparent'}
+                                    onClick={() => setExpanded(expanded === r.customer.id ? null : r.customer.id)}>
                                     <td>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                                             <div style={{

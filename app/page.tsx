@@ -27,7 +27,7 @@ const GeoHeatmap = dynamic(() => import('@/components/GeoHeatmap'), { ssr: false
 const PortfolioHeatmap = dynamic(() => import('@/components/PortfolioHeatmap'), { ssr: false });
 const GandhigiriMode = dynamic(() => import('@/components/GandhigiriMode'), { ssr: false });
 const ExportReports = dynamic(() => import('@/components/ExportReports'), { ssr: false });
-const AgentLeaderboard = dynamic(() => import('@/components/AgentLeaderboard'), { ssr: false });
+
 const CashFlowCalendar = dynamic(() => import('@/components/CashFlowCalendar'), { ssr: false });
 const EscalationWorkflow = dynamic(() => import('@/components/EscalationWorkflow'), { ssr: false });
 const MLModelDashboard = dynamic(() => import('@/components/MLModelDashboard'), { ssr: false });
@@ -189,7 +189,7 @@ function PageRouter() {
       {activePage === 'bulk' && <BulkActions />}
       {activePage === 'sentiment' && <SentimentAnalyzer />}
       {activePage === 'mlmodel' && <MLModelDashboard />}
-      {activePage === 'leaderboard' && <AgentLeaderboard />}
+
       {activePage === 'cashflow' && <CashFlowCalendar />}
       {activePage === 'reports' && <ExportReports />}
     </Suspense>

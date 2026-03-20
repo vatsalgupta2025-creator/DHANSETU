@@ -37,7 +37,7 @@ export default function RoleSelector({ onSelect, bankName, bankAccent }: Props) 
     return (
         <div style={{
             position: 'fixed', inset: 0, zIndex: 9998,
-            background: 'linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 40%, #f0ebe0 100%)',
+            background: 'var(--bg-base)',
             display: 'flex', flexDirection: 'column', alignItems: 'center',
             justifyContent: 'center', padding: 24,
         }}>
@@ -45,20 +45,20 @@ export default function RoleSelector({ onSelect, bankName, bankAccent }: Props) 
             <div style={{ textAlign: 'center', marginBottom: 48, animation: 'fadeInDown 0.6s ease both' }}>
                 <div style={{
                     width: 64, height: 64, borderRadius: '50%',
-                    background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
-                    boxShadow: `0 8px 32px ${accent}40`,
+                    background: `linear-gradient(135deg, ${accent}, var(--bank-accent-2))`,
+                    boxShadow: `0 8px 32px rgba(var(--bank-accent-rgb), 0.4)`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '1.6rem', margin: '0 auto 20px', color: 'white',
                 }}>₹</div>
                 <div style={{
-                    fontSize: '2rem', fontWeight: 900, fontFamily: 'Space Grotesk, sans-serif',
-                    background: `linear-gradient(135deg, ${accent}, #16a34a, #f5c842)`,
+                    fontSize: '2.2rem', fontWeight: 900, fontFamily: 'Space Grotesk, sans-serif',
+                    background: `linear-gradient(135deg, ${accent}, var(--bank-accent-2))`,
                     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text', marginBottom: 8,
+                    backgroundClip: 'text', marginBottom: 8, letterSpacing: '-0.03em',
                 }}>
                     {bankName ? `${bankName} · DhanSetu` : 'DhanSetu'}
                 </div>
-                <div style={{ color: '#8b7355', fontSize: '1rem' }}>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', fontWeight: 500 }}>
                     Select your login type to continue
                 </div>
             </div>
@@ -77,55 +77,58 @@ export default function RoleSelector({ onSelect, bankName, bankAccent }: Props) 
                             style={{
                                 flex: 1, maxWidth: 320,
                                 background: isSelected
-                                    ? `linear-gradient(135deg, ${accent}18, ${accent}08)`
-                                    : isHovered ? 'rgba(139, 90, 43, 0.04)' : '#fefcf8',
-                                border: `2px solid ${isSelected ? accent : isHovered ? `${accent}60` : 'rgba(139, 90, 43, 0.12)'}`,
-                                borderRadius: 20, padding: '32px 28px',
+                                    ? `linear-gradient(135deg, var(--bank-accent-light) 0%, transparent 100%)`
+                                    : 'var(--bg-surface)',
+                                border: `2px solid ${isSelected ? accent : isHovered ? accent : 'var(--border)'}`,
+                                borderRadius: 24, padding: '32px 28px',
                                 cursor: 'pointer', textAlign: 'left',
-                                transition: 'all 0.25s ease',
-                                transform: isSelected ? 'scale(0.97)' : isHovered ? 'translateY(-4px)' : 'none',
-                                boxShadow: isHovered ? `0 12px 36px ${accent}20` : '0 2px 12px rgba(139,90,43,0.06)',
+                                transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                                transform: isSelected ? 'scale(0.97)' : isHovered ? 'translateY(-6px) scale(1.02)' : 'none',
+                                boxShadow: isHovered ? `var(--shadow-lg), var(--shadow-glow)` : 'var(--shadow-md)',
                                 animation: `fadeInUp 0.5s ease ${i * 0.15}s both`,
-                                position: 'relative', overflow: 'hidden',
+                                position: 'relative', overflow: 'hidden', backdropFilter: 'blur(20px)',
                             }}
                         >
                             {isSelected && (
                                 <div style={{
-                                    position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-                                    background: `linear-gradient(90deg, ${accent}, #16a34a)`,
+                                    position: 'absolute', top: 0, left: 0, right: 0, height: 4,
+                                    background: `linear-gradient(90deg, ${accent}, var(--bank-accent-2))`,
                                 }} />
                             )}
 
                             {/* Icon */}
                             <div style={{
                                 width: 56, height: 56, borderRadius: 16,
-                                background: `${accent}15`,
+                                background: `var(--bank-accent-light)`,
+                                border: `1px solid ${accent}40`,
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 fontSize: '1.8rem', marginBottom: 20,
+                                transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                                transform: isHovered ? 'scale(1.1) rotate(-5deg)' : 'none',
                             }}>
                                 {role.icon}
                             </div>
 
                             {/* Title */}
                             <div style={{
-                                fontSize: '1.25rem', fontWeight: 800, color: '#3d2b1f',
-                                fontFamily: 'Space Grotesk, sans-serif', marginBottom: 4,
+                                fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)',
+                                fontFamily: 'Space Grotesk, sans-serif', marginBottom: 6, letterSpacing: '-0.02em',
                             }}>
                                 {role.title}
                             </div>
-                            <div style={{ fontSize: '0.82rem', color: '#8b7355', marginBottom: 20 }}>
+                            <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: 24, fontWeight: 500 }}>
                                 {role.subtitle}
                             </div>
 
                             {/* Features list */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                                 {role.features.map(f => (
-                                    <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.78rem', color: '#5a3e28' }}>
+                                    <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: 500 }}>
                                         <div style={{
-                                            width: 18, height: 18, borderRadius: 6,
-                                            background: `${accent}15`, color: accent,
+                                            width: 20, height: 20, borderRadius: '50%',
+                                            background: `var(--bank-accent-light)`, color: accent,
                                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            fontSize: '0.62rem', fontWeight: 800, flexShrink: 0,
+                                            fontSize: '0.65rem', fontWeight: 800, flexShrink: 0,
                                         }}>✓</div>
                                         {f}
                                     </div>
@@ -135,11 +138,11 @@ export default function RoleSelector({ onSelect, bankName, bankAccent }: Props) 
                             {/* Select indicator */}
                             {isSelected && (
                                 <div style={{
-                                    position: 'absolute', top: 16, right: 16,
-                                    width: 24, height: 24, borderRadius: '50%',
-                                    background: accent, color: 'white',
+                                    position: 'absolute', top: 20, right: 20,
+                                    width: 28, height: 28, borderRadius: '50%',
+                                    background: accent, color: 'white', border: '3px solid white', boxShadow: 'var(--shadow-sm)',
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    fontSize: '0.7rem', fontWeight: 800,
+                                    fontSize: '0.8rem', fontWeight: 900,
                                 }}>✓</div>
                             )}
                         </button>
