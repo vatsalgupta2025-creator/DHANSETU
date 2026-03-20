@@ -115,27 +115,27 @@ export default function Analytics() {
     ];
 
     return (
-        <div style={{ padding: '28px 32px', maxWidth: 1400 }}>
-            <div style={{ marginBottom: 20 }}>
-                <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>{t('analytics.title', lang)}</h1>
-                <p style={{ color: '#64748b', fontSize: '0.875rem', margin: '6px 0 0' }}>
-                    Performance metrics, ROI comparison, NPA reduction projections, and AI effectiveness
-                </p>
-            </div>
-            <div style={{ display: 'flex', gap: 4, background: '#f1f5f9', borderRadius: 12, padding: 4, marginBottom: 20, flexWrap: 'wrap' }}>
-                {TABS_LIST.map(t => (
-                    <button key={t.id} onClick={() => setActiveTab(t.id)}
-                        style={{ padding: '7px 14px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.78rem', background: activeTab === t.id ? '#fff' : 'transparent', color: activeTab === t.id ? '#0d9488' : '#64748b', boxShadow: activeTab === t.id ? '0 1px 4px rgba(0,0,0,0.08)' : 'none' }}>
-                        {t.label}
-                    </button>
-                ))}
-            </div>
+            <div style={{ padding: '28px 32px', maxWidth: 1400 }}>
+                <div style={{ marginBottom: 20 }}>
+                    <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>{t('analytics.title', lang)}</h1>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '6px 0 0' }}>
+                        Performance metrics, ROI comparison, NPA reduction projections, and AI effectiveness
+                    </p>
+                </div>
+                <div style={{ display: 'flex', gap: 4, background: 'var(--bg-elevated)', borderRadius: 12, padding: 4, marginBottom: 20, flexWrap: 'wrap', border: '1px solid var(--border)' }}>
+                    {TABS_LIST.map(t => (
+                        <button key={t.id} onClick={() => setActiveTab(t.id)}
+                            style={{ padding: '7px 14px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.78rem', background: activeTab === t.id ? 'var(--bg-surface)' : 'transparent', color: activeTab === t.id ? 'var(--bank-accent)' : 'var(--text-secondary)', boxShadow: activeTab === t.id ? 'var(--shadow-sm)' : 'none', transition: 'all 0.2s' }}>
+                            {t.label}
+                        </button>
+                    ))}
+                </div>
 
             {/* ROI Simulator */}
             {activeTab === 'roi' && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 20 }}>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '24px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>Simulation Parameters</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 20 }}>Simulation Parameters</div>
                         {[
                             { label: 'Portfolio Size (accounts)', val: portfolioSize, setter: setPortfolioSize, min: 100, max: 10000, step: 100 },
                             { label: 'Avg Loan Size (₹)', val: avgLoanSize, setter: setAvgLoanSize, min: 50000, max: 2000000, step: 50000 },
@@ -144,7 +144,7 @@ export default function Analytics() {
                         ].map(p => (
                             <div key={p.label} style={{ marginBottom: 16 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                                    <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#475569' }}>{p.label}</label>
+                                    <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{p.label}</label>
                                     <span style={{ fontWeight: 800, color: '#0d9488', fontSize: '0.82rem' }}>
                                         {p.label.includes('₹') ? `₹${p.val.toLocaleString('en-IN')}` : p.label.includes('%') ? `${p.val}%` : p.val.toLocaleString()}
                                     </span>
@@ -160,14 +160,14 @@ export default function Analytics() {
                             <div style={{ fontSize: '0.78rem', opacity: 0.85, marginTop: 4 }}>Additional recovery with DhanSetu vs baseline</div>
                         </div>
                         {[
-                            { label: 'Total Portfolio', val: `₹${Math.round(totalPortfolio / 10000000).toFixed(1)} Cr`, color: '#0f172a', bg: '#f8fafc' },
+                            { label: 'Total Portfolio', val: `₹${Math.round(totalPortfolio / 10000000).toFixed(1)} Cr`, color: 'var(--text-primary)', bg: '#f8fafc' },
                             { label: 'Baseline Recovery', val: `₹${Math.round(baselineAmount / 10000000).toFixed(1)} Cr`, color: '#dc2626', bg: '#fef2f2' },
                             { label: 'AI Recovery', val: `₹${Math.round(aiAmount / 10000000).toFixed(1)} Cr`, color: '#16a34a', bg: '#f0fdf4' },
                             { label: 'Implementation Cost', val: `₹${Math.round(implementationCost / 100000).toFixed(1)}L`, color: '#d97706', bg: '#fffbeb' },
                             { label: 'First-Year ROI', val: `${roi}%`, color: roi > 0 ? '#16a34a' : '#dc2626', bg: roi > 0 ? '#f0fdf4' : '#fef2f2' },
                         ].map(item => (
-                            <div key={item.label} style={{ background: item.bg, borderRadius: 12, padding: '14px 18px', border: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span style={{ fontSize: '0.82rem', color: '#475569', fontWeight: 500 }}>{item.label}</span>
+                            <div key={item.label} style={{ background: item.bg, borderRadius: 12, padding: '14px 18px', border: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{item.label}</span>
                                 <span style={{ fontWeight: 800, fontSize: '1.1rem', color: item.color, fontFamily: 'Space Grotesk' }}>{item.val}</span>
                             </div>
                         ))}
@@ -178,8 +178,8 @@ export default function Analytics() {
             {/* NPA Reduction */}
             {activeTab === 'npa' && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '24px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>NPA Reduction Projection (12 months)</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 16 }}>NPA Reduction Projection (12 months)</div>
                         <ResponsiveContainer width="100%" height={260}>
                             <LineChart data={[
                                 { month: 'M1', npa: 8.2, target: 7.5 }, { month: 'M2', npa: 7.8, target: 7.2 },
@@ -199,8 +199,8 @@ export default function Analytics() {
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '24px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>NPA Impact Summary</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 16 }}>NPA Impact Summary</div>
                         {[
                             { label: 'Starting NPA %', val: '8.2%', color: '#dc2626', change: '' },
                             { label: 'Projected End (Month 12)', val: '4.7%', color: '#16a34a', change: '-3.5pp' },
@@ -211,7 +211,7 @@ export default function Analytics() {
                         ].map(item => (
                             <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #f8fafc' }}>
                                 <div>
-                                    <div style={{ fontSize: '0.8rem', color: '#475569', fontWeight: 500 }}>{item.label}</div>
+                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{item.label}</div>
                                     {item.change && <div style={{ fontSize: '0.65rem', color: '#16a34a', fontWeight: 700 }}>{item.change}</div>}
                                 </div>
                                 <span style={{ fontWeight: 800, fontSize: '1rem', color: item.color, fontFamily: 'Space Grotesk' }}>{item.val}</span>
@@ -224,17 +224,17 @@ export default function Analytics() {
             {/* Collector Productivity */}
             {activeTab === 'productivity' && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '24px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>Agent Performance Dashboard</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 16 }}>Agent Performance Dashboard</div>
                         {[
                             { name: 'Ravi Kumar', contacts: 142, ptps: 38, resolved: 24, target: 30 },
                             { name: 'Priya Singh', contacts: 128, ptps: 42, resolved: 28, target: 30 },
                             { name: 'Arjun Mehta', contacts: 167, ptps: 51, resolved: 32, target: 30 },
                             { name: 'Sunita Devi', contacts: 119, ptps: 29, resolved: 18, target: 30 },
                         ].map(agent => (
-                            <div key={agent.name} style={{ padding: '14px', background: '#f8fafc', borderRadius: 10, marginBottom: 10, border: '1px solid #e2e8f0' }}>
+                            <div key={agent.name} style={{ padding: '14px', background: '#f8fafc', borderRadius: 10, marginBottom: 10, border: '1px solid var(--border)' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                                    <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#0f172a' }}>{agent.name}</div>
+                                    <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)' }}>{agent.name}</div>
                                     <span style={{ background: agent.resolved >= agent.target ? '#f0fdf4' : '#fef2f2', color: agent.resolved >= agent.target ? '#16a34a' : '#dc2626', border: `1px solid ${agent.resolved >= agent.target ? '#bbf7d0' : '#fecaca'}`, borderRadius: 999, padding: '2px 8px', fontSize: '0.65rem', fontWeight: 700 }}>
                                         {agent.resolved >= agent.target ? '✅ On Target' : '⚠️ Below Target'}
                                     </span>
@@ -250,8 +250,8 @@ export default function Analytics() {
                             </div>
                         ))}
                     </div>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '24px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>AI vs Human Productivity</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 16 }}>AI vs Human Productivity</div>
                         {[
                             { metric: 'Contacts/Day', human: 45, ai: 500, unit: '' },
                             { metric: 'Cost/Recovery', human: 820, ai: 95, unit: '₹' },
@@ -261,7 +261,7 @@ export default function Analytics() {
                             { metric: 'Availability', human: 9, ai: 24, unit: 'hrs' },
                         ].map(item => (
                             <div key={item.metric} style={{ marginBottom: 12 }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, fontSize: '0.78rem', fontWeight: 600, color: '#475569' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
                                     <span>{item.metric}</span>
                                     <div style={{ display: 'flex', gap: 12 }}>
                                         <span style={{ color: '#dc2626' }}>👤 {item.human}{item.unit}</span>
@@ -282,11 +282,11 @@ export default function Analytics() {
                 <div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
                         {abData.map((v, idx) => (
-                            <div key={v.variant} style={{ background: '#fff', borderRadius: 16, padding: '24px', border: `2px solid ${abWinner !== null && abWinner === (['a', 'b'][idx] as 'a' | 'b') ? '#0d9488' : '#e2e8f0'}` }}>
+                            <div key={v.variant} style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '24px', border: `2px solid ${abWinner !== null && abWinner === (['a', 'b'][idx] as 'a' | 'b') ? '#0d9488' : '#e2e8f0'}` }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
                                     <div>
-                                        <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '1rem' }}>Variant {idx === 0 ? 'A' : 'B'}</div>
-                                        <div style={{ fontSize: '0.78rem', color: '#64748b' }}>{v.variant}</div>
+                                        <div style={{ fontWeight: 800, color: 'var(--text-primary)', fontSize: '1rem' }}>Variant {idx === 0 ? 'A' : 'B'}</div>
+                                        <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>{v.variant}</div>
                                     </div>
                                     {abWinner === ['a', 'b'][idx] && (
                                         <span style={{ background: '#f0fdf4', color: '#16a34a', border: '1px solid #bbf7d0', borderRadius: 999, padding: '4px 12px', fontSize: '0.72rem', fontWeight: 700, height: 'fit-content' }}>🏆 WINNER</span>
@@ -300,17 +300,17 @@ export default function Analytics() {
                                     { k: 'Customer CSAT', v: v.csat, unit: '/5' },
                                 ].map(item => (
                                     <div key={item.k} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #f8fafc' }}>
-                                        <span style={{ fontSize: '0.78rem', color: '#64748b' }}>{item.k}</span>
+                                        <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>{item.k}</span>
                                         <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#0d9488', fontFamily: 'Space Grotesk' }}>{item.v}{item.unit}</span>
                                     </div>
                                 ))}
                             </div>
                         ))}
                     </div>
-                    <div style={{ background: '#fff', borderRadius: 14, padding: '20px', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 14, padding: '20px', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div>
-                            <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>Statistical Significance</div>
-                            <div style={{ fontSize: '0.78rem', color: '#64748b' }}>
+                            <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>Statistical Significance</div>
+                            <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                                 Variant A (Empathetic) shows 27% higher conversion. P-value: 0.023 (statistically significant at 95% confidence)
                             </div>
                         </div>
@@ -318,7 +318,7 @@ export default function Analytics() {
                             <button onClick={() => setAbWinner('a')} style={{ padding: '10px 20px', background: 'linear-gradient(135deg, #0d9488, #16a34a)', color: 'white', border: 'none', borderRadius: 10, fontWeight: 700, cursor: 'pointer' }}>
                                 🏆 Select Variant A
                             </button>
-                            <button onClick={() => setAbWinner('b')} style={{ padding: '10px 20px', background: '#f1f5f9', color: '#475569', border: 'none', borderRadius: 10, fontWeight: 700, cursor: 'pointer' }}>
+                            <button onClick={() => setAbWinner('b')} style={{ padding: '10px 20px', background: '#f1f5f9', color: 'var(--text-secondary)', border: 'none', borderRadius: 10, fontWeight: 700, cursor: 'pointer' }}>
                                 Select Variant B
                             </button>
                         </div>
@@ -351,8 +351,8 @@ export default function Analytics() {
 
                     {/* Charts row */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 16 }}>
-                        <div style={{ background: '#fff', borderRadius: 16, padding: '22px', border: '1px solid #e2e8f0' }}>
-                            <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: 4 }}>Monthly Recovery Performance</div>
+                        <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '22px', border: '1px solid var(--border)' }}>
+                            <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: 4 }}>Monthly Recovery Performance</div>
                             <div style={{ color: '#94a3b8', fontSize: '0.72rem', marginBottom: 16 }}>Recovery rate (%) and cost per recovery (₹)</div>
                             <ResponsiveContainer width="100%" height={220}>
                                 <LineChart data={monthlyData}>
@@ -360,15 +360,15 @@ export default function Analytics() {
                                     <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
                                     <YAxis yAxisId="left" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} unit="%" />
                                     <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} unit="₹" />
-                                    <Tooltip contentStyle={{ borderRadius: 8, fontSize: '0.8rem', border: '1px solid #e2e8f0' }} />
+                                    <Tooltip contentStyle={{ borderRadius: 8, fontSize: '0.8rem', border: '1px solid var(--border)' }} />
                                     <Legend wrapperStyle={{ fontSize: '0.75rem' }} />
                                     <Line yAxisId="left" type="monotone" dataKey="recovered" name="Recovery %" stroke="#0d9488" strokeWidth={2.5} dot={{ fill: '#0d9488', r: 4 }} />
                                     <Line yAxisId="right" type="monotone" dataKey="cost" name="Cost/Recovery ₹" stroke="#ea580c" strokeWidth={2} strokeDasharray="5 3" dot={false} />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
-                        <div style={{ background: '#fff', borderRadius: 16, padding: '22px', border: '1px solid #e2e8f0' }}>
-                            <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: 4 }}>AI vs Human: Capability Radar</div>
+                        <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '22px', border: '1px solid var(--border)' }}>
+                            <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: 4 }}>AI vs Human: Capability Radar</div>
                             <div style={{ color: '#94a3b8', fontSize: '0.72rem', marginBottom: 16 }}>DhanSetu (teal) vs Traditional (red)</div>
                             <ResponsiveContainer width="100%" height={220}>
                                 <RadarChart data={radarData}>
@@ -387,8 +387,8 @@ export default function Analytics() {
 
             {activeTab === 'bot' && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '22px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: 16 }}>Bot Intent Distribution</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '22px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: 16 }}>Bot Intent Distribution</div>
                         <ResponsiveContainer width="100%" height={260}>
                             <BarChart data={intentData} layout="vertical" barSize={18}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" horizontal={false} />
@@ -401,8 +401,8 @@ export default function Analytics() {
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '22px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: 16 }}>Bot Performance KPIs</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '22px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: 16 }}>Bot Performance KPIs</div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                             {[
                                 { label: 'Conversations Handled', val: '5,247', icon: '💬', color: '#0d9488' },
@@ -415,7 +415,7 @@ export default function Analytics() {
                                 <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f1f5f9' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                                         <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
-                                        <span style={{ fontSize: '0.82rem', color: '#475569' }}>{item.label}</span>
+                                        <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>{item.label}</span>
                                     </div>
                                     <span style={{ fontWeight: 800, fontSize: '0.95rem', color: item.color, fontFamily: 'Space Grotesk' }}>{item.val}</span>
                                 </div>
@@ -427,8 +427,8 @@ export default function Analytics() {
 
             {activeTab === 'channels' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                    <div style={{ background: '#fff', borderRadius: 16, padding: '22px', border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: 16 }}>Channel Performance Comparison</div>
+                    <div style={{ background: 'var(--bg-surface)', borderRadius: 16, padding: '22px', border: '1px solid var(--border)' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: 16 }}>Channel Performance Comparison</div>
                         <ResponsiveContainer width="100%" height={260}>
                             <BarChart data={channelData} barGap={4}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -444,8 +444,8 @@ export default function Analytics() {
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14 }}>
                         {channelData.map(ch => (
-                            <div key={ch.channel} style={{ background: '#fff', borderRadius: 14, padding: '18px', border: '1px solid #e2e8f0' }}>
-                                <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: 12 }}>
+                            <div key={ch.channel} style={{ background: 'var(--bg-surface)', borderRadius: 14, padding: '18px', border: '1px solid var(--border)' }}>
+                                <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: 12 }}>
                                     {ch.channel === 'WhatsApp' ? '📱' : ch.channel === 'SMS' ? '💬' : ch.channel === 'Call' ? '📞' : '✉️'} {ch.channel}
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>

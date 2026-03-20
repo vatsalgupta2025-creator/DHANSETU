@@ -25,6 +25,14 @@ const RecoveryToolkit = dynamic(() => import('@/components/RecoveryToolkit'), { 
 const ComplianceCenter = dynamic(() => import('@/components/ComplianceCenter'), { ssr: false });
 const GeoHeatmap = dynamic(() => import('@/components/GeoHeatmap'), { ssr: false });
 const PortfolioHeatmap = dynamic(() => import('@/components/PortfolioHeatmap'), { ssr: false });
+const GandhigiriMode = dynamic(() => import('@/components/GandhigiriMode'), { ssr: false });
+const ExportReports = dynamic(() => import('@/components/ExportReports'), { ssr: false });
+
+const CashFlowCalendar = dynamic(() => import('@/components/CashFlowCalendar'), { ssr: false });
+const EscalationWorkflow = dynamic(() => import('@/components/EscalationWorkflow'), { ssr: false });
+const MLModelDashboard = dynamic(() => import('@/components/MLModelDashboard'), { ssr: false });
+const SentimentAnalyzer = dynamic(() => import('@/components/SentimentAnalyzer'), { ssr: false });
+const BulkActions = dynamic(() => import('@/components/BulkActions'), { ssr: false });
 
 // ─── Page label translations ──────────────────────────────────────────────────
 const PAGE_LABELS_BY_LANG: Record<string, Record<string, string>> = {
@@ -32,62 +40,97 @@ const PAGE_LABELS_BY_LANG: Record<string, Record<string, string>> = {
     dashboard: 'Command Center', risk: 'AI Risk Engine', insights: 'Insights Hub',
     messages: 'Message Studio', bot: 'AI Negotiation Bot', campaigns: 'Campaign Builder',
     toolkit: 'Recovery Toolkit', analytics: 'Analytics & ROI', compliance: 'Compliance Center',
-    geoheat: 'Geo Heatmap', portfolio: 'Portfolio Heatmap',
+    geoheat: 'Geo Heatmap', portfolio: 'Portfolio Heatmap', gandhigiri: 'Gandhigiri Mode',
+    escalation: 'Escalation Workflow', bulk: 'Bulk Actions', sentiment: 'Sentiment Analyzer',
+    mlmodel: 'ML Model Dashboard', leaderboard: 'Agent Leaderboard', cashflow: 'Cash Flow Calendar', reports: 'Export & Reports',
   },
   'hi-IN': {
     dashboard: 'कमांड सेंटर', risk: 'AI जोखिम इंजन', insights: 'अंतर्दृष्टि केंद्र',
     messages: 'संदेश स्टूडियो', bot: 'AI वार्ता बॉट', campaigns: 'अभियान निर्माता',
     toolkit: 'रिकवरी टूलकिट', analytics: 'विश्लेषण और ROI', compliance: 'अनुपालन केंद्र',
+    gandhigiri: 'गांधीगिरी मोड',
+    escalation: 'एस्केलेशन वर्कफ़्लो', bulk: 'बल्क एक्शन', sentiment: 'भावना विश्लेषक',
+    mlmodel: 'ML मॉडल डैशबोर्ड', leaderboard: 'एजेंट लीडरबोर्ड', cashflow: 'कैश फ्लो कैलेंडर', reports: 'निर्यात और रिपोर्ट',
   },
   'bn-IN': {
     dashboard: 'কমান্ড সেন্টার', risk: 'AI ঝুঁকি ইঞ্জিন', insights: 'অন্তর্দৃষ্টি হাব',
     messages: 'বার্তা স্টুডিও', bot: 'AI আলোচনা বট', campaigns: 'ক্যাম্পেইন বিল্ডার',
     toolkit: 'রিকভারি টুলকিট', analytics: 'বিশ্লেষণ ও ROI', compliance: 'সম্মতি কেন্দ্র',
+    gandhigiri: 'গান্ধীগিরি মোড',
+    escalation: 'এসক্যালেশন ওয়ার্কফ্লো', bulk: 'বাল্ক অ্যাকশন', sentiment: 'সেন্টিমেন্ট বিশ্লেষক',
+    mlmodel: 'ML মডেল ড্যাশবোর্ড', leaderboard: 'এজেন্ট লিডারবোর্ড', cashflow: 'ক্যাশ ফ্লো ক্যালেন্ডার', reports: 'এক্সপোর্ট ও রিপোর্ট',
   },
   'te-IN': {
     dashboard: 'కమాండ్ సెంటర్', risk: 'AI రిస్క్ ఇంజిన్', insights: 'ఇన్‌సైట్స్ హబ్',
     messages: 'మెసేజ్ స్టూడియో', bot: 'AI చర్చా బాట్', campaigns: 'క్యాంపెయిన్ బిల్డర్',
     toolkit: 'రికవరీ టూల్‌కిట్', analytics: 'అనలిటిక్స్ & ROI', compliance: 'కంప్లయన్స్ సెంటర్',
+    gandhigiri: 'గాంధీగిరి మోడ్',
+    escalation: 'ఎస్కలేషన్ వర్క్‌ఫ్లో', bulk: 'బల్క్ యాక్షన్స్', sentiment: 'సెంటిమెంట్ ఎనలైజర్',
+    mlmodel: 'ML మోడల్ డాష్‌బోర్డ్', leaderboard: 'ఏజెంట్ లీడర్‌బోర్డ్', cashflow: 'క్యాష్ ఫ్లో క్యాలెండర్', reports: 'ఎక్స్‌పోర్ట్ & రిపోర్ట్స్',
   },
   'mr-IN': {
     dashboard: 'कमांड सेंटर', risk: 'AI जोखीम इंजिन', insights: 'अंतर्दृष्टी हब',
     messages: 'संदेश स्टुडिओ', bot: 'AI वाटाघाटी बॉट', campaigns: 'मोहीम निर्माता',
     toolkit: 'रिकव्हरी टूलकिट', analytics: 'विश्लेषण आणि ROI', compliance: 'अनुपालन केंद्र',
+    gandhigiri: 'गांधीगिरी मोड',
+    escalation: 'एस्केलेशन वर्कफ्लो', bulk: 'बल्क क्रिया', sentiment: 'भावना विश्लेषक',
+    mlmodel: 'ML मॉडेल डॅशबोर्ड', leaderboard: 'एजेंट लीडरबोर्ड', cashflow: 'कॅश फ्लो कॅलेंडर', reports: 'निर्यात आणि अहवाल',
   },
   'ta-IN': {
     dashboard: 'கட்டளை மையம்', risk: 'AI ஆபத்து இயந்திரம்', insights: 'நுண்ணறிவு மையம்',
     messages: 'செய்தி ஸ்டுடியோ', bot: 'AI பேச்சுவார்த்தை போட்', campaigns: 'பிரச்சார கட்டமைப்பாளர்',
     toolkit: 'மீட்பு கருவித்தொகுப்பு', analytics: 'பகுப்பாய்வு & ROI', compliance: 'இணக்க மையம்',
+    gandhigiri: 'காந்திமுறை பயன்முறை',
+    escalation: 'எஸ்கலேஷன் வர்க்ஃப்லோ', bulk: 'பல்க் செயல்', sentiment: 'உணர்வு பகுப்பாய்வி',
+    mlmodel: 'ML மாதிரி டாஷ்போர்ட்', leaderboard: 'ஏஜெண்ட் லீடர்போர்ட்', cashflow: 'பணப்பாய்வு காலண்டர்', reports: 'எக்ஸ்போர்ட் & ரிப்போர்ட்',
   },
   'gu-IN': {
     dashboard: 'કમાન્ડ સેન્ટર', risk: 'AI જોખમ એન્જિન', insights: 'ઇનસાઇટ્સ હબ',
     messages: 'સંદેશ સ્ટુડિઓ', bot: 'AI વાટાઘાટ બૉટ', campaigns: 'ઝુંબેશ નિર્માતા',
     toolkit: 'રિકવરી ટૂલકિટ', analytics: 'વિશ્લેષણ અને ROI', compliance: 'અનુપાલન કેન્દ્ર',
+    gandhigiri: 'ગાંધીગિરી મોડ',
+    escalation: 'એસ્કેલેશન વર્કફ્લો', bulk: 'બલ્ક ક્રિયા', sentiment: 'ભાવના વિશ્લેષક',
+    mlmodel: 'ML મોડેલ ડેશબોર્ડ', leaderboard: 'એજેન્ટ લીડરબોર્ડ', cashflow: 'કેશ ફ્લો કેલેન્ડર', reports: 'એક્સપોર્ટ અને રિપોર્ટ',
   },
   'kn-IN': {
     dashboard: 'ಕಮಾಂಡ್ ಸೆಂಟರ್', risk: 'AI ಅಪಾಯ ಇಂಜಿನ್', insights: 'ಇನ್‌ಸೈಟ್ಸ್ ಹಬ್',
     messages: 'ಸಂದೇಶ ಸ್ಟುಡಿಯೋ', bot: 'AI ಮಾತುಕತೆ ಬಾಟ್', campaigns: 'ಕ್ಯಾಂಪೇನ್ ಬಿಲ್ಡರ್',
     toolkit: 'ರಿಕವರಿ ಟೂಲ್‌ಕಿಟ್', analytics: 'ವಿಶ್ಲೇಷಣೆ & ROI', compliance: 'ಅನುಪಾಲನ ಕೇಂದ್ರ',
+    gandhigiri: 'ಗಾಂಧೀಗಿರಿ ಮೋಡ್',
+    escalation: 'ಎಸ್ಕಲೇಶನ್ ವರ್ಕ್‌ಫ್ಲೋ', bulk: 'ಬಲ್ಕ್ ಕ್ರಿಯೆ', sentiment: 'ಸೆಂಟಿಮೆಂಟ್ ವಿಶ್ಲೇಷಕ',
+    mlmodel: 'ML ಮಾಡೆಲ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್', leaderboard: 'ಏಜೆಂಟ್ ಲೀಡರ್‌ಬೋರ್ಡ್', cashflow: 'ಕ್ಯಾಶ್ ಫ್ಲೋ ಕ್ಯಾಲೆಂಡರ್', reports: 'ಎಕ್ಸ್‌ಪೋರ್ಟ್ & ರಿಪೋರ್ಟ್ಸ್',
   },
   'ml-IN': {
     dashboard: 'കമാൻഡ് സെന്റർ', risk: 'AI റിസ്ക് എഞ്ചിൻ', insights: 'ഇൻസൈറ്റ്സ് ഹബ്',
     messages: 'മെസേജ് സ്റ്റുഡിയോ', bot: 'AI ചർച്ച ബോട്ട്', campaigns: 'ക്യാമ്പെയ്ൻ ബിൽഡർ',
     toolkit: 'റിക്കവറി ടൂൾകിറ്റ്', analytics: 'അനലിറ്റിക്സ് & ROI', compliance: 'കംപ്ലയൻസ് സെന്റർ',
+    gandhigiri: 'ഗാന്ധിഗിരി മോഡ്',
+    escalation: 'എസ്കലേഷൻ വർക്ക്‌ഫ്ലോ', bulk: 'ബല്ക്ക് ആക്ഷൻ', sentiment: 'സെൻറിമെൻറ് അനലൈസർ',
+    mlmodel: 'ML മോഡൽ ഡാഷ്‌ബോർഡ്', leaderboard: 'ഏജന്റ് ലീഡർബോർഡ്', cashflow: 'ക്യാഷ് ഫ്ലോ കലണ്ടർ', reports: 'എക്‌സ്‌പോർട് & റിപ്പോർട്റ്സ്',
   },
   'pa-IN': {
     dashboard: 'ਕਮਾਂਡ ਸੈਂਟਰ', risk: 'AI ਜੋਖਮ ਇੰਜਣ', insights: 'ਇਨਸਾਈਟਸ ਹੱਬ',
     messages: 'ਸੁਨੇਹਾ ਸਟੂਡੀਓ', bot: 'AI ਗੱਲਬਾਤ ਬੋਟ', campaigns: 'ਮੁਹਿੰਮ ਨਿਰਮਾਤਾ',
     toolkit: 'ਰਿਕਵਰੀ ਟੂਲਕਿੱਟ', analytics: 'ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ROI', compliance: 'ਪਾਲਣਾ ਕੇਂਦਰ',
+    gandhigiri: 'ਗਾਂਧੀਗਿਰੀ ਮੋਡ',
+    escalation: 'ਐਸਕੇਲੇਸ਼ਨ ਵਰਕਫ਼ਲੋ', bulk: 'ਬਲਕ ਐਕਸ਼ਨ', sentiment: 'ਭਾਵਨਾ ਵਿਸ਼ਲੇਸ਼ਕ',
+    mlmodel: 'ML ਮਾਡਲ ਡੈਸ਼ਬੋਰਡ', leaderboard: 'ਏਜੰਟ ਲੀਡਰਬੋਰਡ', cashflow: 'ਕੈਸ਼ ਫ਼ਲੋ ਕੈਲੰਡਰ', reports: 'ਐਕਸਪੋਰਟ ਅਤੇ ਰਿਪੋਰਟ',
   },
   'or-IN': {
     dashboard: 'କମାଣ୍ଡ ସେଣ୍ଟର', risk: 'AI ଝୁଁକି ଇଞ୍ଜିନ', insights: 'ଇନ୍‌ସାଇଟ୍ସ ହବ',
     messages: 'ବାର୍ତ୍ତା ଷ୍ଟୁଡିଓ', bot: 'AI ଆଲୋଚନା ବଟ', campaigns: 'ଅଭିଯାନ ନିର୍ମାତା',
     toolkit: 'ରିକଭରି ଟୁଲ୍‌କିଟ', analytics: 'ବିଶ୍ଳେଷଣ ଓ ROI', compliance: 'ଅନୁପାଳନ କେନ୍ଦ୍ର',
+    gandhigiri: 'ଗାନ୍ଧୀଗିରି ମୋଡ୍',
+    escalation: 'ଏସ୍କେଲେଶନ ଓୟର୍କଫ୍ଲୋ', bulk: 'ବଲ୍କ ଅ୍ୟାକ୍ଶନ', sentiment: 'ସେଣ୍ଟିମେଣ୍ଟ ବିଶ୍ଲେଷକ',
+    mlmodel: 'ML ମଡେଲ ଡ୍ୟାଶବୋର୍ଡ', leaderboard: 'ଏଜେଣ୍ଟ ଲୀଡରବୋର୍ଡ', cashflow: 'କ୍ୟାଶ ଫ୍ଲୋ କ୍ୟାଲେଣ୍ଡର', reports: 'ଏକ୍ସପୋର୍ଟ ଓ ରିପୋର୍ଟ',
   },
   'ur-IN': {
     dashboard: 'کمانڈ سینٹر', risk: 'AI رسک انجن', insights: 'بصیرت مرکز',
     messages: 'پیغام اسٹوڈیو', bot: 'AI مذاکرات بوٹ', campaigns: 'مہم ساز',
     toolkit: 'ریکوری ٹول کٹ', analytics: 'تجزیات اور ROI', compliance: 'تعمیل مرکز',
+    gandhigiri: 'گاندھی گری موڈ',
+    escalation: 'ایسکیلیشن ورک فلو', bulk: 'بلک ایکشن', sentiment: 'جذبات تجزیہ کار',
+    mlmodel: 'ML ماڈل ڈیش بورڈ', leaderboard: 'ایجنٹ لیڈر بورڈ', cashflow: 'کیش فلو کیلنڈر', reports: 'ایکسپورٹ اور رپورٹ',
   },
 };
 
@@ -141,6 +184,14 @@ function PageRouter() {
       {activePage === 'compliance' && <ComplianceCenter />}
       {activePage === 'geoheat' && <GeoHeatmap />}
       {activePage === 'portfolio' && <PortfolioHeatmap />}
+      {activePage === 'gandhigiri' && <GandhigiriMode />}
+      {activePage === 'escalation' && <EscalationWorkflow />}
+      {activePage === 'bulk' && <BulkActions />}
+      {activePage === 'sentiment' && <SentimentAnalyzer />}
+      {activePage === 'mlmodel' && <MLModelDashboard />}
+
+      {activePage === 'cashflow' && <CashFlowCalendar />}
+      {activePage === 'reports' && <ExportReports />}
     </Suspense>
   );
 }

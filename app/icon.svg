@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d9488"/>
+      <stop offset="100%" style="stop-color:#16a34a"/>
+    </linearGradient>
+    <linearGradient id="bridge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:#d1fae5;stop-opacity:0.95"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded background -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <!-- Bridge arch (Setu = Bridge) -->
+  <path d="M12 42 Q32 18 52 42" stroke="url(#bridge)" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Bridge pillars -->
+  <line x1="20" y1="34" x2="20" y2="48" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <line x1="32" y1="24" x2="32" y2="48" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <line x1="44" y1="34" x2="44" y2="48" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <!-- Base line -->
+  <line x1="10" y1="48" x2="54" y2="48" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <!-- Rupee symbol (₹) on top -->
+  <text x="32" y="19" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white" opacity="0.9">₹</text>
+</svg>

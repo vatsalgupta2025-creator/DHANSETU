@@ -7,7 +7,6 @@ import {
     BarChart, Bar, Cell,
 } from 'recharts';
 
-// Generate synthetic payment history for a borrower
 function generatePaymentHistory(record: LoanRecord) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const history = [];
@@ -27,7 +26,6 @@ function generatePaymentHistory(record: LoanRecord) {
     return history;
 }
 
-// Generate synthetic risk trend
 function generateRiskTrend(record: LoanRecord) {
     const score = record.risk.riskScore;
     const trend = [];
@@ -42,7 +40,6 @@ function generateRiskTrend(record: LoanRecord) {
     return trend;
 }
 
-// Generate synthetic communication log
 function generateCommLog(record: LoanRecord) {
     const channels = ['WhatsApp', 'SMS', 'Phone Call', 'Email', 'Voice Bot'];
     const statuses = ['Delivered', 'Read', 'Answered', 'No Response', 'Partial Response'];
@@ -62,7 +59,6 @@ function generateCommLog(record: LoanRecord) {
     return log;
 }
 
-// AI suggested action based on risk profile
 function getAISuggestion(record: LoanRecord) {
     const { riskTier, bestChannel, bestTime, expectedRecovery } = record.risk;
     const dpd = record.loan.currentDpd;
@@ -118,276 +114,167 @@ export default function Customer360() {
     const tierColor = tierColors[r.risk.riskTier] || '#8b7355';
 
     return (
-        <div style={{
-            position: 'fixed', inset: 0, zIndex: 200,
-            display: 'flex', justifyContent: 'flex-end',
-        }}>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', justifyContent: 'flex-end' }}>
             {/* Backdrop */}
-            <div
-                onClick={() => setSelectedBorrower(null)}
-                style={{
-                    position: 'absolute', inset: 0,
-                    background: 'rgba(0,0,0,0.35)',
-                    backdropFilter: 'blur(4px)',
-                    animation: 'fadeIn 0.2s ease',
-                }}
-            />
+            <div onClick={() => setSelectedBorrower(null)} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)', animation: 'fadeIn 0.2s ease' }} />
 
             {/* Panel */}
-            <div style={{
-                width: '58%', maxWidth: 820, minWidth: 500,
-                height: '100vh', overflowY: 'auto',
-                background: '#fdfbf7',
-                borderLeft: '1px solid rgba(139,90,43,0.12)',
-                boxShadow: '-8px 0 40px rgba(139,90,43,0.12)',
-                position: 'relative', zIndex: 1,
-                animation: 'slideInRight 0.3s ease',
-                padding: '0 0 40px',
-            }}>
+            <div style={{ width: '85%', maxWidth: 1200, height: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-base)', borderLeft: '1px solid var(--border)', boxShadow: 'var(--shadow-xl)', position: 'relative', zIndex: 1, animation: 'slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 {/* Header */}
-                <div style={{
-                    position: 'sticky', top: 0, zIndex: 10,
-                    background: 'rgba(253,251,247,0.95)', backdropFilter: 'blur(12px)',
-                    borderBottom: '1px solid rgba(139,90,43,0.10)',
-                    padding: '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                        <div style={{
-                            width: 44, height: 44, borderRadius: '50%',
-                            background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            color: 'white', fontWeight: 800, fontSize: '0.9rem',
-                        }}>
+                <div style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '20px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                        <div style={{ width: 48, height: 48, borderRadius: '50%', background: `linear-gradient(135deg, ${accent}, ${accent}cc)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '1rem', boxShadow: `0 4px 12px ${accent}40` }}>
                             {r.customer.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </div>
                         <div>
-                            <div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#3d2b1f', fontFamily: 'Space Grotesk' }}>
-                                {r.customer.name}
-                            </div>
-                            <div style={{ fontSize: '0.75rem', color: '#8b7355' }}>
-                                {r.customer.phone} · {r.customer.region} · {r.customer.occupation}
-                            </div>
+                            <div style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--text-primary)', fontFamily: 'Space Grotesk' }}>{r.customer.name}</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{r.customer.phone} · {r.customer.region} · {r.customer.occupation}</div>
                         </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <span style={{
-                            background: `${tierColor}18`, color: tierColor, border: `1px solid ${tierColor}30`,
-                            borderRadius: 999, padding: '3px 12px', fontSize: '0.7rem', fontWeight: 700,
-                        }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <span style={{ background: `${tierColor}18`, color: tierColor, border: `1px solid ${tierColor}30`, borderRadius: 999, padding: '4px 14px', fontSize: '0.75rem', fontWeight: 700 }}>
                             {r.risk.riskTier} Risk
                         </span>
-                        <button
-                            onClick={() => setSelectedBorrower(null)}
-                            style={{
-                                width: 32, height: 32, borderRadius: 8,
-                                background: 'rgba(139,90,43,0.06)', border: '1px solid rgba(139,90,43,0.12)',
-                                cursor: 'pointer', color: '#3d2b1f', fontSize: '1rem',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            }}
-                        >✕</button>
+                        <button onClick={() => setSelectedBorrower(null)} style={{ width: 36, height: 36, borderRadius: 10, background: 'var(--bg-elevated)', border: '1px solid var(--border)', cursor: 'pointer', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}>✕</button>
                     </div>
                 </div>
 
-                <div style={{ padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-
-                    {/* ── 1. Loan Details ─────────────────────────── */}
-                    <Section title="📋 Loan Details" accent={accent}>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
-                            {[
-                                { label: 'Loan ID', value: r.loan.loanId },
-                                { label: 'Product', value: r.loan.product },
-                                { label: 'Principal', value: `₹${(r.loan.principal / 100000).toFixed(1)}L` },
-                                { label: 'EMI Amount', value: `₹${r.loan.emiAmount.toLocaleString()}` },
-                                { label: 'Tenor', value: `${r.loan.tenorMonths} months` },
-                                { label: 'Interest Rate', value: `${r.loan.interestRate}%` },
-                                { label: 'Outstanding', value: `₹${(r.loan.outstandingAmount / 100000).toFixed(1)}L` },
-                                { label: 'Overdue', value: `₹${r.loan.overdueAmount.toLocaleString()}`, highlight: r.loan.overdueAmount > 0 },
-                                { label: 'Disbursal Date', value: r.loan.disbursalDate },
-                                { label: 'Credit Score', value: r.loan.creditScore.toString() },
-                                { label: 'Bounces (6m)', value: r.loan.bounceCount6m.toString() },
-                                { label: 'Avg Balance (3m)', value: `₹${(r.loan.avgBalance3m / 1000).toFixed(0)}K` },
-                            ].map(item => (
-                                <div key={item.label} style={{
-                                    background: '#fefcf8', borderRadius: 10, padding: '10px 14px',
-                                    border: '1px solid rgba(139,90,43,0.08)',
-                                }}>
-                                    <div style={{ fontSize: '0.6rem', color: '#8b7355', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>{item.label}</div>
-                                    <div style={{
-                                        fontSize: '0.88rem', fontWeight: 700,
-                                        color: (item as any).highlight ? '#dc2626' : '#3d2b1f',
-                                    }}>{item.value}</div>
+                {/* 2-Column Layout */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'minmax(340px, 35%) 1fr', height: 'calc(100vh - 89px)', overflow: 'hidden' }}>
+                    {/* Left Column (Core Details) */}
+                    <div style={{ padding: '28px 32px', borderRight: '1px solid var(--border)', overflowY: 'auto', background: 'var(--bg-surface)' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                            {/* DPD Gauge */}
+                            <div style={{ background: 'var(--bg-elevated)', borderRadius: 16, border: '1px solid var(--border)', padding: '24px 20px', textAlign: 'center' }}>
+                                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Current DPD Status</div>
+                                <div style={{ position: 'relative', width: 140, height: 140, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', background: `conic-gradient(${tierColor} ${Math.min(r.loan.currentDpd, 180) / 180 * 100}%, var(--border) 0%)` }}>
+                                    <div style={{ width: 116, height: 116, borderRadius: '50%', background: 'var(--bg-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.05)' }}>
+                                        <span style={{ fontSize: '2.4rem', fontWeight: 900, color: tierColor, fontFamily: 'Space Grotesk', lineHeight: 1 }}>{r.loan.currentDpd}</span>
+                                        <span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', fontWeight: 700, marginTop: 4 }}>DAYS OVERDUE</span>
+                                    </div>
                                 </div>
-                            ))}
-                        </div>
-                    </Section>
-
-                    {/* ── 2. DPD Status ────────────────────────────── */}
-                    <Section title="📊 DPD Status" accent={accent}>
-                        <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 14 }}>
-                            <div style={{
-                                width: 80, height: 80, borderRadius: '50%',
-                                background: `conic-gradient(${tierColor} ${Math.min(r.loan.currentDpd, 180) / 180 * 100}%, rgba(139,90,43,0.08) 0%)`,
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            }}>
-                                <div style={{
-                                    width: 62, height: 62, borderRadius: '50%', background: '#fdfbf7',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    flexDirection: 'column',
-                                }}>
-                                    <span style={{ fontSize: '1.4rem', fontWeight: 900, color: tierColor, fontFamily: 'Space Grotesk' }}>{r.loan.currentDpd}</span>
-                                    <span style={{ fontSize: '0.55rem', color: '#8b7355', fontWeight: 600 }}>DPD</span>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 24 }}>
+                                    <div style={{ background: 'var(--bg-base)', padding: '10px', borderRadius: 10, border: '1px solid var(--border)' }}>
+                                        <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>{r.loan.maxDpd12m}</div>
+                                        <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Max DPD (12m)</div>
+                                    </div>
+                                    <div style={{ background: 'var(--bg-base)', padding: '10px', borderRadius: 10, border: '1px solid var(--border)' }}>
+                                        <div style={{ fontSize: '1rem', fontWeight: 800, color: r.risk.defaultProbability30d > 0.5 ? '#dc2626' : '#22c55e' }}>{Math.round(r.risk.defaultProbability30d * 100)}%</div>
+                                        <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Default Prob</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div style={{ flex: 1 }}>
-                                <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
-                                    <MiniStat label="Current DPD" value={`${r.loan.currentDpd} days`} color={tierColor} />
-                                    <MiniStat label="Max DPD (12m)" value={`${r.loan.maxDpd12m} days`} color='#8b7355' />
-                                    <MiniStat label="Default Prob (30d)" value={`${(r.risk.defaultProbability30d * 100).toFixed(1)}%`} color={r.risk.defaultProbability30d > 0.5 ? '#dc2626' : '#22c55e'} />
-                                </div>
-                                {/* DPD bar */}
-                                <div style={{ height: 8, background: 'rgba(139,90,43,0.08)', borderRadius: 999, overflow: 'hidden' }}>
-                                    <div style={{
-                                        height: '100%', borderRadius: 999,
-                                        width: `${Math.min(100, (r.loan.currentDpd / 180) * 100)}%`,
-                                        background: `linear-gradient(90deg, #22c55e, #f59e0b, #dc2626)`,
-                                        transition: 'width 0.5s ease',
-                                    }} />
-                                </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.6rem', color: '#b3a08a', marginTop: 3 }}>
-                                    <span>0</span><span>30</span><span>60</span><span>90</span><span>120</span><span>180+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </Section>
 
-                    {/* ── 3. Payment History ──────────────────────── */}
-                    <Section title="💰 Payment History (12 Months)" accent={accent}>
-                        <ResponsiveContainer width="100%" height={160}>
-                            <BarChart data={paymentHistory} barSize={24}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(139,90,43,0.08)" vertical={false} />
-                                <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#8b7355' }} axisLine={false} tickLine={false} />
-                                <YAxis tick={{ fontSize: 10, fill: '#8b7355' }} axisLine={false} tickLine={false} />
-                                <Tooltip
-                                    contentStyle={{ background: '#fdfbf7', border: '1px solid rgba(139,90,43,0.15)', borderRadius: 10, fontSize: '0.78rem', color: '#3d2b1f' }}
-                                    formatter={(v: any, name: any, props: any) => [`₹${v.toLocaleString()}`, props.payload.status]}
-                                />
-                                <Bar dataKey="amount" radius={[4, 4, 0, 0]}>
-                                    {paymentHistory.map((entry, i) => (
-                                        <Cell key={i} fill={entry.status === 'Paid' ? '#22c55e' : entry.status === 'Partial' ? '#f59e0b' : '#dc2626'} />
+                            {/* Loan Details Grid */}
+                            <Section title="Loan Details" accent={accent}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                                    {[
+                                        { l: 'Product', v: r.loan.product },
+                                        { l: 'Principal', v: `₹${(r.loan.principal / 100000).toFixed(1)}L` },
+                                        { l: 'EMI Amount', v: `₹${r.loan.emiAmount.toLocaleString()}` },
+                                        { l: 'Tenor', v: `${r.loan.tenorMonths} months` },
+                                        { l: 'Outstanding', v: `₹${(r.loan.outstandingAmount / 100000).toFixed(1)}L`, color: 'var(--text-primary)' },
+                                        { l: 'Overdue', v: `₹${r.loan.overdueAmount.toLocaleString()}`, color: r.loan.overdueAmount > 0 ? '#dc2626' : 'var(--text-primary)' },
+                                        { l: 'CIBIL', v: r.loan.creditScore },
+                                        { l: 'Bounces (6m)', v: r.loan.bounceCount6m, color: r.loan.bounceCount6m > 0 ? '#f59e0b' : 'var(--text-primary)' },
+                                    ].map(item => (
+                                        <div key={item.l} style={{ background: 'var(--bg-base)', borderRadius: 10, padding: '12px', border: '1px solid var(--border)' }}>
+                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', marginBottom: 6 }}>{item.l}</div>
+                                            <div style={{ fontSize: '0.9rem', fontWeight: 700, color: item.color || 'var(--text-primary)' }}>{item.v}</div>
+                                        </div>
                                     ))}
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
-                        <div style={{ display: 'flex', gap: 16, marginTop: 8, justifyContent: 'center' }}>
-                            {[{ label: 'Paid', color: '#22c55e' }, { label: 'Partial', color: '#f59e0b' }, { label: 'Missed', color: '#dc2626' }].map(l => (
-                                <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.7rem', color: '#8b7355' }}>
-                                    <div style={{ width: 8, height: 8, borderRadius: 2, background: l.color }} />
-                                    {l.label}
                                 </div>
-                            ))}
+                            </Section>
                         </div>
-                    </Section>
+                    </div>
 
-                    {/* ── 4. Risk Trend Graph ─────────────────────── */}
-                    <Section title="📈 Risk Score Trend" accent={accent}>
-                        <ResponsiveContainer width="100%" height={160}>
-                            <LineChart data={riskTrend}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(139,90,43,0.08)" vertical={false} />
-                                <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#8b7355' }} axisLine={false} tickLine={false} />
-                                <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: '#8b7355' }} axisLine={false} tickLine={false} />
-                                <Tooltip
-                                    contentStyle={{ background: '#fdfbf7', border: '1px solid rgba(139,90,43,0.15)', borderRadius: 10, fontSize: '0.78rem', color: '#3d2b1f' }}
-                                    formatter={(v: any) => [`${v}`, 'Risk Score']}
-                                />
-                                <Line type="monotone" dataKey="score" stroke={accent} strokeWidth={2.5} dot={{ fill: accent, r: 3 }} activeDot={{ r: 5, fill: accent }} />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </Section>
-
-                    {/* ── 5. Communication Log ────────────────────── */}
-                    <Section title="📞 Past Communication Log" accent={accent}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                            {commLog.map((entry, i) => (
-                                <div key={i} style={{
-                                    display: 'flex', alignItems: 'flex-start', gap: 12,
-                                    padding: '12px 0',
-                                    borderBottom: i < commLog.length - 1 ? '1px solid rgba(139,90,43,0.08)' : 'none',
-                                }}>
-                                    {/* Timeline dot */}
-                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, paddingTop: 2 }}>
-                                        <div style={{
-                                            width: 10, height: 10, borderRadius: '50%',
-                                            background: i === 0 ? accent : 'rgba(139,90,43,0.15)',
-                                            border: `2px solid ${i === 0 ? accent : 'rgba(139,90,43,0.2)'}`,
-                                        }} />
-                                        {i < commLog.length - 1 && <div style={{ width: 1, height: 28, background: 'rgba(139,90,43,0.10)' }} />}
-                                    </div>
-                                    <div style={{ flex: 1 }}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
-                                            <div style={{ fontWeight: 700, fontSize: '0.82rem', color: '#3d2b1f' }}>{entry.channel}</div>
-                                            <div style={{ fontSize: '0.68rem', color: '#b3a08a' }}>{entry.date}</div>
-                                        </div>
-                                        <div style={{ fontSize: '0.76rem', color: '#5a3e28', marginBottom: 4 }}>{entry.message}</div>
-                                        <span style={{
-                                            fontSize: '0.62rem', fontWeight: 600, padding: '2px 8px', borderRadius: 999,
-                                            background: entry.status.includes('Answered') || entry.status.includes('Read') || entry.status.includes('Delivered') ? 'rgba(34,197,94,0.12)' : 'rgba(245,158,11,0.12)',
-                                            color: entry.status.includes('Answered') || entry.status.includes('Read') || entry.status.includes('Delivered') ? '#16a34a' : '#d97706',
-                                        }}>
-                                            {entry.status}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </Section>
-
-                    {/* ── 6. AI Suggested Action ───────────────────── */}
-                    {aiSuggestion && (
-                        <Section title="🤖 AI Suggested Action" accent={accent}>
-                            <div style={{
-                                background: `${accent}08`, border: `1px solid ${accent}25`,
-                                borderRadius: 14, padding: '18px 20px',
-                            }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                                    <div style={{
-                                        width: 36, height: 36, borderRadius: 10,
-                                        background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        fontSize: '1rem', color: 'white',
-                                    }}>🎯</div>
-                                    <div>
-                                        <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#3d2b1f', fontFamily: 'Space Grotesk' }}>
-                                            {aiSuggestion.action}
-                                        </div>
-                                        <div style={{
-                                            fontSize: '0.62rem', fontWeight: 700, textTransform: 'uppercase',
-                                            color: aiSuggestion.urgency === 'high' ? '#dc2626' : aiSuggestion.urgency === 'medium' ? '#f59e0b' : '#22c55e',
-                                        }}>
-                                            {aiSuggestion.urgency === 'high' ? '🔴 Urgent' : aiSuggestion.urgency === 'medium' ? '🟡 Important' : '🟢 Routine'}
+                    {/* Right Column (Timeline & Graphs) */}
+                    <div style={{ padding: '28px 36px', overflowY: 'auto', background: 'var(--bg-base)' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+                            {/* AI Action */}
+                            {aiSuggestion && (
+                                <div style={{ background: `linear-gradient(135deg, ${accent}15, ${accent}05)`, border: `1px solid ${accent}30`, borderRadius: 16, padding: '24px', position: 'relative', overflow: 'hidden' }}>
+                                    <div style={{ position: 'absolute', top: -20, right: -20, fontSize: '8rem', opacity: 0.05, transform: 'rotate(15deg)' }}>🧠</div>
+                                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, position: 'relative' }}>
+                                        <div style={{ width: 48, height: 48, borderRadius: 14, background: `linear-gradient(135deg, ${accent}, ${accent}cc)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', color: 'white', boxShadow: `0 8px 16px ${accent}40`, flexShrink: 0 }}>⚡</div>
+                                        <div>
+                                            <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 6 }}>
+                                                <div style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-primary)', fontFamily: 'Space Grotesk' }}>{aiSuggestion.action}</div>
+                                                <div style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999, background: aiSuggestion.urgency === 'high' ? 'rgba(239, 68, 68, 0.15)' : aiSuggestion.urgency === 'medium' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(34, 197, 94, 0.15)', color: aiSuggestion.urgency === 'high' ? '#dc2626' : aiSuggestion.urgency === 'medium' ? '#d97706' : '#16a34a', border: `1px solid ${aiSuggestion.urgency === 'high' ? '#fecaca' : aiSuggestion.urgency === 'medium' ? '#fde68a' : '#bbf7d0'}` }}>
+                                                    {aiSuggestion.urgency === 'high' ? '🔴 Urgent' : aiSuggestion.urgency === 'medium' ? '🟡 Important' : '🟢 Routine'}
+                                                </div>
+                                            </div>
+                                            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, margin: '0 0 16px 0' }}>{aiSuggestion.detail}</p>
+                                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                                                {aiSuggestion.steps.map((step, i) => (
+                                                    <div key={i} style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', padding: '6px 12px', borderRadius: 8, fontSize: '0.75rem', color: 'var(--text-primary)', fontWeight: 600 }}>{i + 1}. {step}</div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p style={{ fontSize: '0.8rem', color: '#5a3e28', lineHeight: 1.5, marginBottom: 14 }}>
-                                    {aiSuggestion.detail}
-                                </p>
-                                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#3d2b1f', marginBottom: 8 }}>Recommended Steps:</div>
-                                <ol style={{ margin: 0, paddingLeft: 18 }}>
-                                    {aiSuggestion.steps.map((step, i) => (
-                                        <li key={i} style={{ fontSize: '0.78rem', color: '#5a3e28', marginBottom: 6, lineHeight: 1.4 }}>{step}</li>
-                                    ))}
-                                </ol>
+                            )}
+
+                            {/* Charts Row */}
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+                                <Section title="Payment History (12m)" accent={accent}>
+                                    <ResponsiveContainer width="100%" height={180}>
+                                        <BarChart data={paymentHistory} barSize={16}>
+                                            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                                            <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} />
+                                            <YAxis tick={{ fontSize: 10, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} />
+                                            <Tooltip contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-glow)', borderRadius: 12, fontSize: '0.8rem', boxShadow: 'var(--shadow-lg)' }} formatter={(v: any, n: any, p: any) => [`₹${v.toLocaleString()}`, p.payload.status]} />
+                                            <Bar dataKey="amount" radius={[4, 4, 0, 0]}>
+                                                {paymentHistory.map((e, i) => <Cell key={i} fill={e.status === 'Paid' ? '#22c55e' : e.status === 'Partial' ? '#f59e0b' : '#dc2626'} />)}
+                                            </Bar>
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </Section>
+                                <Section title="Risk Score Trend" accent={accent}>
+                                    <ResponsiveContainer width="100%" height={180}>
+                                        <LineChart data={riskTrend}>
+                                            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                                            <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} />
+                                            <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} />
+                                            <Tooltip contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-glow)', borderRadius: 12, fontSize: '0.8rem', boxShadow: 'var(--shadow-lg)' }} />
+                                            <Line type="monotone" dataKey="score" stroke={accent} strokeWidth={3} dot={{ fill: accent, r: 4 }} activeDot={{ r: 6, fill: accent, stroke: 'var(--bg-base)', strokeWidth: 2 }} />
+                                        </LineChart>
+                                    </ResponsiveContainer>
+                                </Section>
                             </div>
-                        </Section>
-                    )}
+
+                            {/* Timeline */}
+                            <Section title="Communication Timeline" accent={accent}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                                    {commLog.map((entry, i) => (
+                                        <div key={i} style={{ display: 'flex', gap: 16, padding: '0 0 20px 0', position: 'relative' }}>
+                                            <div style={{ width: 80, fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'right', paddingTop: 2 }}>{entry.date}</div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                <div style={{ width: 14, height: 14, borderRadius: '50%', background: i === 0 ? accent : 'var(--bg-elevated)', border: `3px solid ${i === 0 ? 'var(--bg-surface)' : 'var(--border)'}`, boxShadow: i === 0 ? `0 0 0 2px ${accent}` : 'none', zIndex: 2 }} />
+                                                {i < commLog.length - 1 && <div style={{ position: 'absolute', top: 14, bottom: 0, left: 103, width: 2, background: 'var(--border)', zIndex: 1 }} />}
+                                            </div>
+                                            <div style={{ flex: 1, background: 'var(--bg-surface)', padding: '14px 18px', borderRadius: 12, border: '1px solid var(--border)', marginTop: -6 }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                                                    <div style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--text-primary)' }}>{entry.channel}</div>
+                                                    <span style={{ fontSize: '0.65rem', fontWeight: 700, padding: '3px 10px', borderRadius: 999, background: entry.status.includes('Answered') || entry.status.includes('Read') || entry.status.includes('Delivered') ? 'rgba(34,197,94,0.12)' : 'rgba(245,158,11,0.12)', color: entry.status.includes('Answered') || entry.status.includes('Read') || entry.status.includes('Delivered') ? '#16a34a' : '#d97706' }}>
+                                                        {entry.status}
+                                                    </span>
+                                                </div>
+                                                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{entry.message}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </Section>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <style>{`
                 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-                @keyframes slideInRight {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to   { transform: translateX(0); opacity: 1; }
-                }
+                @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
             `}</style>
         </div>
     );
@@ -397,28 +284,17 @@ export default function Customer360() {
 function Section({ title, accent, children }: { title: string; accent: string; children: React.ReactNode }) {
     return (
         <div style={{
-            background: '#fefcf8', borderRadius: 14,
-            border: '1px solid rgba(139,90,43,0.10)',
-            padding: '18px 20px',
+            background: 'var(--bg-elevated)', borderRadius: 16,
+            border: '1px solid var(--border)',
+            padding: '24px',
         }}>
             <div style={{
-                fontSize: '0.88rem', fontWeight: 800, color: '#3d2b1f',
-                fontFamily: 'Space Grotesk', marginBottom: 14,
-                paddingBottom: 10, borderBottom: '1px solid rgba(139,90,43,0.08)',
+                fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)',
+                fontFamily: 'Space Grotesk', marginBottom: 16,
             }}>
                 {title}
             </div>
             {children}
-        </div>
-    );
-}
-
-// Mini stat badge
-function MiniStat({ label, value, color }: { label: string; value: string; color: string }) {
-    return (
-        <div style={{ flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: '0.58rem', color: '#8b7355', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 2 }}>{label}</div>
-            <div style={{ fontSize: '0.88rem', fontWeight: 800, color, fontFamily: 'Space Grotesk' }}>{value}</div>
         </div>
     );
 }

@@ -56,14 +56,22 @@ function getRiskTier(score: number): 'Critical' | 'High' | 'Medium' | 'Low' {
   return 'Low';
 }
 
-// Simulate XGBoost-like scoring
+// Simulate XGBoost-like scoring with non-linear factors
 function computeRiskScore(dpd: number, bounces: number, creditScore: number, avgBalance: number, emi: number): number {
-  const dpdFactor = Math.min(dpd * 1.2, 50);
-  const bounceFactor = bounces * 8;
-  const creditFactor = Math.max(0, (750 - creditScore) / 5);
-  const balanceFactor = avgBalance < emi ? 15 : avgBalance < emi * 2 ? 8 : 0;
-  const raw = dpdFactor + bounceFactor + creditFactor + balanceFactor;
-  return Math.min(Math.max(Math.round(raw + (Math.random() * 8 - 4)), 5), 97);
+  // Non-linear DPD penalty (steep increase after 30 days)
+  const dpdFactor = dpd < 30 ? (dpd * 0.8) : (24 + Math.pow(dpd - 30, 1.2) * 0.6);
+  // Exponential bounce penalty
+  const bounceFactor = Math.pow(bounces, 1.5) * 6;
+  // High penalty for poor credit, slight reward for good credit
+  const creditFactor = creditScore < 650 ? Math.pow((650 - creditScore) / 10, 1.5) : (750 - creditScore) / 15;
+  // Liquidity penalty
+  const balanceRatio = avgBalance / emi;
+  const balanceFactor = balanceRatio < 0.5 ? 20 : balanceRatio < 1 ? 12 : balanceRatio < 2 ? 5 : -5;
+  
+  const raw = Math.min(dpdFactor, 45) + Math.min(bounceFactor, 30) + Math.min(Math.max(creditFactor, -5), 25) + balanceFactor;
+  // Add some pseudo-randomness representing unstructured data factors (device ping, sms data)
+  const mlVariance = (Math.random() * 10 - 3); 
+  return Math.min(Math.max(Math.round(raw + mlVariance), 5), 98);
 }
 
 const regions = [
@@ -80,7 +88,10 @@ const regions = [
 ];
 
 const occupations = ['salaried', 'self_employed', 'small_business', 'farmer', 'professional'];
-const products = ['Personal Loan', 'Home Loan', 'Vehicle Loan', 'Business Loan', 'Agricultural Loan'];
+const products = [
+  'Personal Loan', 'Home Loan', 'Vehicle Loan', 'Business Loan', 'Agricultural Loan',
+  'Kisan Credit Card (KCC)', 'Mudra Loan (Shishu)', 'Mudra Loan (Kishore)', 'MSME Term Loan', 'Education Loan'
+];
 const channels: Array<'whatsapp' | 'sms' | 'call' | 'email'> = ['whatsapp', 'sms', 'call', 'email'];
 const previousResponseOptions = [
   ['sms_opened'],

@@ -1,229 +1,499 @@
-# DhanSetu - AI Debt Recovery Platform
+<div align="center">
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-Next.js_16-black?style=for-the-badge&logo=next.js" alt="Next.js">
-  <img src="https://img.shields.io/badge/AI-XGBoost-blue?style=for-the-badge" alt="XGBoost">
-  <img src="https://img.shields.io/badge/Languages-23-orange?style=for-the-badge" alt="Languages">
-  <img src="https://img.shields.io/badge/Compliance-RBI-green?style=for-the-badge" alt="RBI Compliant">
-</p>
+# 🏦 DhanSetu
 
-## 📋 Project Overview
+### *धन सेतु — The Bridge to Financial Recovery*
 
-**DhanSetu** is an AI-powered debt recovery platform designed specifically for Indian banks and financial institutions. It leverages advanced machine learning, natural language processing, and multi-channel communication to maximize recovery rates while ensuring full regulatory compliance with Reserve Bank of India (RBI) guidelines.
+**AI-Powered Debt Recovery Platform for Indian Banks**
 
-### The Problem
+*Empathetic. Intelligent. Compliant.*
 
-Indian banks face significant challenges in debt recovery:
-
-1. **Rising NPAs (Non-Performing Assets)** - India's banking sector has struggled with mounting bad loans
-2. **Manual Processes** - Traditional recovery methods are labor-intensive and inefficient
-3. **Language Barriers** - India has 23+ languages; generic messages have low engagement
-4. **Regulatory Complexity** - RBI guidelines are stringent; non-compliance leads to penalties
-5. **Limited Personalization** - One-size-fits-all approaches yield poor recovery rates
-6. **Agent Productivity** - Human agents can't scale to handle thousands of defaulters
-
-### The Solution
-
-DhanSetu uses AI to automate and optimize the entire debt recovery workflow:
-- **Intelligent Risk Scoring** - XGBoost ML models predict default probability
-- **Multi-Language Outreach** - Messages in 23 Indian languages + dialects
-- **Voice AI** - TTS/STT for conversational recovery calls
-- **Compliance Guard** - Real-time RBI guideline monitoring
-- **Campaign Optimization** - AI suggests best channels, timing, and messaging
-- **ROI Tracking** - Measure recovery performance with detailed analytics
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![XGBoost](https://img.shields.io/badge/ML-XGBoost-FF6600?style=for-the-badge)](https://xgboost.ai/)
+[![GPT-4](https://img.shields.io/badge/AI-GPT--4-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
+[![Languages](https://img.shields.io/badge/Languages-23-E97627?style=for-the-badge)](/)
+[![RBI Compliant](https://img.shields.io/badge/RBI-Compliant-16a34a?style=for-the-badge)](/)
+[![License](https://img.shields.io/badge/License-Proprietary-F5C842?style=for-the-badge)](/)
 
 ---
 
-## 🎯 Key Features
+> *"Be the change you wish to see in the world."* — Mahatma Gandhi
+>
+> DhanSetu doesn't just recover debt — it **restores dignity**, one conversation at a time.
 
-### 1. Command Center (Dashboard)
-- Real-time KPI tracking (Total Portfolio, Recovery Rate, At-Risk Amount)
-- Borrower ranking by risk and recoverability
-- AI-powered recommendations
-- Trend analysis with month-over-month comparisons
+<br/>
 
-### 2. AI Risk Engine
-- **XGBoost-powered** risk scoring model
-- 30/60/90-day default probability predictions
-- Risk tier classification (Critical, High, Medium, Low)
-- Best channel recommendations per borrower
+[✨ Features](#-features-at-a-glance) · [🧠 Architecture](#-architecture) · [🚀 Quick Start](#-quick-start) · [🎯 Problem Statement](#-the-problem-were-solving) · [📊 Impact](#-impact--metrics) · [🌐 Languages](#-23-indian-languages)
 
-### 3. Insights Hub
-- **Uplift vs Risk Score Matrix** - Visual segment analysis
-- Fraud intent detection
-- Channel performance heatmaps
-- Optimal contact scheduling
-- Early warning signals
-
-### 4. Message Studio
-- **23 Indian Languages** supported:
-  - Hindi, Bengali, Telugu, Marathi, Tamil, Gujarati, Kannada, Malayalam, Punjabi, Oriya, Assamese, Nepali, Sanskrit, Urdu, Konkani, Sindhi, Bodo, Dogri, Santali, Kashmiri, Manipuri, Khasi, Mizo
-- **Tone Customization**: Formal, Friendly, Empathetic, Urgent
-- **Channel Selection**: WhatsApp, SMS, Voice Call, Email
-- Preview with live rendering
-
-### 5. AI Negotiation Bot
-- Conversational AI powered by GPT-4
-- **Text-to-Speech (TTS)** - Voice output in multiple languages
-- **Speech-to-Text (STT)** - Voice input recognition
-- Real-time negotiation with payment plan discussions
-- Maintains conversation context across interactions
-
-### 6. Campaign Builder
-- Visual step-by-step campaign creation
-- Segment targeting (by risk, geography, product, DPD)
-- Multi-channel delivery (WhatsApp, SMS, Call, Email)
-- Scheduling with compliance-aware timing
-- Live progress tracking
-
-### 7. Recovery Toolkit
-- **Promise-to-Pay (PTP)** management
-- Credit score simulation with improvement projections
-- Gamification with DhanPoints rewards
-- Milestone tracking and achievement badges
-- Settlement calculators
-
-### 8. Analytics & ROI
-- Incremental recovery vs baseline comparison
-- NPA reduction projections (12-month)
-- Agent performance dashboards
-- AI vs Human productivity analysis
-- A/B testing for campaign variants
-
-### 9. Compliance Center
-- **RBI Compliance** monitoring
-- DLT (Distributed Ledger Technology) compliance
-- Gender & regional fairness audits
-- Communication logs with compliance scoring
-- Auto-escalation for flagged accounts
+</div>
 
 ---
 
-## 🛠️ Technology Stack
+## 🎯 The Problem We're Solving
 
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | Next.js 16, React, TypeScript, Tailwind CSS |
-| **AI/ML** | XGBoost, GPT-4, Rasa NLU |
+India's banking sector holds over **₹4.2 Lakh Crore** in Non-Performing Assets (NPAs). Traditional recovery methods are:
+
+| Challenge | Impact |
+|:---|:---|
+| 📉 **Manual Processes** | Recovery agents handle only ~50 accounts/month |
+| 🗣️ **Language Barriers** | 23+ languages, but outreach is English-only |
+| ⚖️ **Regulatory Minefields** | RBI violations cost banks ₹100+ Cr annually |
+| 🎯 **Zero Personalization** | Same threatening message to every borrower |
+| 😤 **Hostile Communication** | Destroys customer relationships permanently |
+| 📊 **No Intelligence** | No data-driven prioritization or timing optimization |
+
+### 💡 Our Insight
+
+> What if debt recovery could be **empathetic, intelligent, and culturally aware** — powered by AI that understands not just the numbers, but the *human* behind them?
+
+---
+
+## ✨ Features at a Glance
+
+<div align="center">
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      🏦  D H A N S E T U                       │
+│              AI-Powered Debt Recovery Platform                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │ Command  │  │ AI Risk  │  │ Insights │  │ Message  │       │
+│  │ Center   │  │ Engine   │  │   Hub    │  │ Studio   │       │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘       │
+│                                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │    AI    │  │ Campaign │  │ Recovery │  │Analytics │       │
+│  │   Bot    │  │ Builder  │  │ Toolkit  │  │  & ROI   │       │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘       │
+│                                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │Gandhigiri│  │Compliance│  │Sentiment │  │ ML Model │       │
+│  │  Mode    │  │ Center   │  │ Analyzer │  │Dashboard │       │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘       │
+│                                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │   Geo    │  │Portfolio │  │Escalation│  │  Agent   │       │
+│  │ Heatmap  │  │ Heatmap  │  │ Workflow │  │Leaderbd  │       │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘       │
+│                                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │Customer  │  │CashFlow  │  │  Bulk    │  │ Export & │       │
+│  │  360°    │  │ Calendar │  │ Actions  │  │ Reports  │       │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+</div>
+
+---
+
+### 📊 1. Command Center — *Your Mission Control*
+
+> Real-time KPIs, borrower rankings, AI-powered recommendations, and trend analysis — all in one glance.
+
+- **Live Portfolio Tracking** — Total portfolio value, recovery rate, at-risk amounts
+- **AI Recommendations** — Smart suggestions for next-best-action per borrower
+- **Trend Analysis** — Month-over-month comparisons with predictive forecasting
+- **Bank-Specific Dashboards** — Pre-configured for 10+ major Indian banks (SBI, HDFC, ICICI, PNB, and more)
+
+---
+
+### 🧠 2. AI Risk Engine — *Predict. Prioritize. Prevent.*
+
+> XGBoost ML models score every borrower's default probability at 30/60/90-day intervals.
+
+- **Risk Tier Classification** — Critical · High · Medium · Low
+- **Default Probability Curves** — Visual 30/60/90-day forecasting
+- **Channel Intelligence** — Recommends WhatsApp, SMS, Voice, or Email per borrower
+- **500+ Sample Records** — Comprehensive demo dataset with realistic Indian banking data
+
+---
+
+### 🔍 3. Insights Hub — *See What Others Miss*
+
+- **Uplift vs. Risk Matrix** — Segment borrowers by recoverability
+- **Fraud Intent Detection** — AI-flagged suspicious behavior patterns
+- **Channel Heatmaps** — Visual performance analysis per communication channel
+- **Early Warning System** — Predictive signals before accounts deteriorate
+- **Optimal Contact Timing** — AI determines the best day/hour to reach each borrower
+
+---
+
+### ✉️ 4. Message Studio — *23 Languages. 4 Tones. Infinite Empathy.*
+
+> Craft personalized recovery messages in **any of India's 23 scheduled languages**, with tone control.
+
+| Tone | Use Case |
+|:---|:---|
+| 🤝 **Empathetic** | First-time defaulters, medical hardship |
+| 📋 **Formal** | Corporate loans, legal proceedings |
+| 😊 **Friendly** | Long-term customers, small amounts |
+| ⚡ **Urgent** | High DPD, escalation-ready accounts |
+
+**Channels Supported:** WhatsApp · SMS · Voice Call · Email
+
+---
+
+### 🤖 5. AI Negotiation Bot — *Conversations, Not Confrontations*
+
+> GPT-4 powered conversational AI with **real-time voice** support in multiple Indian languages.
+
+- **Text-to-Speech (TTS)** — Bot speaks in the borrower's native language
+- **Speech-to-Text (STT)** — Voice input recognized via Web Speech API
+- **Smart Negotiation** — Proposes restructured EMI plans, settlement offers
+- **Payment Calculator** — Live EMI restructuring based on borrower's capacity
+- **Contextual Memory** — Maintains conversation history across sessions
+
+---
+
+### 🕊️ 6. Gandhigiri Mode — *Recovery Through Compassion*
+
+> **🏆 Our Signature Innovation** — Transforming debt collection from a transaction into a human connection, inspired by Mahatma Gandhi's core philosophies.
+
+This is not just a feature — it's a **paradigm shift**. Gandhigiri Mode replaces aggressive recovery tactics with an empathetic, personalized dialogue guided by six Gandhian principles. Our AI dynamically crafts messages in the borrower's native language based on these specific modes:
+
+| Principle | Meaning | AI Approach & Strategy |
+|:---|:---|:---|
+| 🕉️ **Satya** | Truth | Transparent, honest communication about the exact debt situation. No hidden fees, no false legal threats. |
+| ☮️ **Ahimsa** | Non-Violence | Respectful, polite language that preserves the borrower's dignity and removes the fear of harassment. |
+| 🏛️ **Swaraj** | Self-Rule | Empowers the borrower with flexible, self-managed payment plans. Puts them back in control. |
+| 🌍 **Sarvodaya** | Welfare of All | Highlights how clearing the debt protects their family's financial future and community standing. |
+| 🔥 **Tapasya** | Discipline | Focuses on **Micro-Payments** (e.g., ₹50/day). Shows how small, consistent daily efforts lead to financial freedom. |
+| 📿 **Sadhana** | Practice | Gentle, consistent follow-ups. Regular reminders treated as a peaceful practice, not aggressive hounding. |
+
+**✨ Key Features of Gandhigiri Mode:**
+- **Dynamic Empathy Engine:** AI generates distinct, culturally-nuanced messages depending on the chosen principle (e.g., *a 'Tapasya' message focuses on small daily savings, while a 'Sarvodaya' message focuses on family welfare*).
+- **Interactive Impact Sliders:** Visualizes how micro-payments (customizable from ₹10-₹500/day) reduce the overall timeline and outstanding amount.
+- **Multilingual Resonance:** All Gandhian messages are natively generated in **12+ Indian languages** (Hindi, Bengali, Telugu, Marathi, Tamil, etc.), ensuring the emotional context is perfectly preserved in the borrower's mother tongue.
+
+---
+
+### 📡 7. Campaign Builder — *Orchestrate at Scale*
+
+- **Visual Workflow** — Step-by-step campaign creation with drag-and-drop
+- **Smart Segmentation** — Target by risk tier, geography, product type, DPD range
+- **Multi-Channel Delivery** — WhatsApp + SMS + Call + Email in a single campaign
+- **Compliance-Aware Scheduling** — Auto-avoids restricted hours per RBI norms
+- **Live Progress Tracking** — Real-time delivery and response monitoring
+
+---
+
+### 🛠️ 8. Recovery Toolkit — *Gamify the Journey*
+
+- **Promise-to-Pay (PTP)** — Digital commitment tracking with reminders
+- **Credit Score Simulator** — Show borrowers how repayment improves their score
+- **DhanPoints Rewards** — Gamification system with points, badges, and milestones
+- **Settlement Calculator** — One-click OTS (One-Time Settlement) computation
+- **Achievement System** — Visual progress tracking to motivate repayment
+
+---
+
+### 📈 9. Analytics & ROI — *Prove the Value*
+
+- **Incremental Recovery** — AI-driven recovery vs. traditional baseline
+- **NPA Reduction Projections** — 12-month forecasting with confidence intervals
+- **Agent Productivity** — AI vs. human performance comparison
+- **A/B Testing** — Campaign variant performance analysis
+- **Cost-Per-Recovery** — Track and optimize unit economics
+
+---
+
+### 🛡️ 10. Compliance Center — *RBI-Ready, Always*
+
+- **Real-Time RBI Monitoring** — Continuous compliance checks on all communications
+- **DLT Integration** — Distributed Ledger Technology compliance for SMS
+- **Fairness Audits** — Gender & regional equity analysis
+- **Auto-Escalation** — Flagged accounts automatically routed to supervisors
+- **Complete Audit Trail** — Every communication logged with compliance score
+
+---
+
+### 🌟 Bonus Modules & Technical Feats
+
+| Module | Description |
+|:---|:---|
+| 🗺️ **Geo Heatmap** | Visualize recovery performance across Indian states |
+| 📊 **Portfolio Heatmap** | Risk distribution visualization by product & region |
+| 🔄 **Escalation Workflow** | Automated tiered escalation with SLA tracking |
+| 📦 **Bulk Actions** | Mass operations on thousands of accounts simultaneously |
+| 🏆 **Agent Leaderboard** | Gamified performance tracking for recovery teams |
+| 📅 **Cash Flow Calendar** | Predict incoming recovery payments by date |
+| 🧠 **ML Model Dashboard** | Monitor model accuracy, drift, and retraining status |
+| 💭 **Sentiment Analyzer** | Gauge borrower sentiment from communication history |
+| 👤 **Customer 360°** | Complete borrower profile with interaction timeline |
+| 📤 **Export & Reports** | One-click PDF/Excel report generation |
+| 🔐 **Secure Bank Login** | Real-time API-driven OTP verification flow with dynamic UI |
+| 🎨 **Immersive WebGL UI** | Custom WebGL shader backgrounds providing a premium, ambient glow |
+| 🌍 **Universal Localization**| Live, context-aware translation of all 19 modules into 23 Indian languages |
+
+---
+
+## 🧠 Architecture
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                    PRESENTATION LAYER                     │
+│  Next.js 16 · React 19 · TypeScript · Framer Motion      │
+│  Tailwind CSS 4 · Recharts · Lucide Icons                 │
+├──────────────────────────────────────────────────────────┤
+│                    APPLICATION LAYER                      │
+│  ┌─────────────┐  ┌──────────────┐  ┌────────────────┐  │
+│  │ React       │  │ Dynamic Page │  │ Internationa-  │  │
+│  │ Context API │  │   Router     │  │ lization (i18n)│  │
+│  └─────────────┘  └──────────────┘  └────────────────┘  │
+├──────────────────────────────────────────────────────────┤
+│                     AI / ML LAYER                         │
+│  ┌───────────┐  ┌──────────┐  ┌────────────────────┐    │
+│  │  XGBoost  │  │  GPT-4   │  │   Web Speech API   │    │
+│  │  Risk     │  │  NLU +   │  │   TTS + STT        │    │
+│  │  Scoring  │  │  Rasa    │  │                    │    │
+│  └───────────┘  └──────────┘  └────────────────────┘    │
+├──────────────────────────────────────────────────────────┤
+│                   DATA & COMPLIANCE                       │
+│  ┌──────────────────┐  ┌──────────────────────────────┐  │
+│  │  500+ Borrower   │  │  RBI Compliance Engine       │  │
+│  │  Records + Bank  │  │  DLT · Fairness · Audit      │  │
+│  │  Configurations  │  │  Logging                     │  │
+│  └──────────────────┘  └──────────────────────────────┘  │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🏦 Supported Banks
+
+DhanSetu ships with pre-configured dashboards, branding, and notifications for:
+
+<div align="center">
+
+| | Bank | Type |
+|:---:|:---|:---|
+| 🔵 | **State Bank of India (SBI)** | Public Sector |
+| 🔴 | **HDFC Bank** | Private Sector |
+| 🟠 | **ICICI Bank** | Private Sector |
+| 🔴 | **Kotak Mahindra Bank** | Private Sector |
+| 🟣 | **Axis Bank** | Private Sector |
+| 🟡 | **Punjab National Bank (PNB)** | Public Sector |
+| 🟠 | **Bank of Baroda** | Public Sector |
+| 🔵 | **Canara Bank** | Public Sector |
+| 🔵 | **Union Bank of India** | Public Sector |
+| 🟢 | **Indian Bank** | Public Sector |
+| 🌐 | **All Banks (Aggregate)** | Multi-Bank View |
+
+</div>
+
+---
+
+## 🌐 23 Indian Languages
+
+DhanSetu's entire interface and message generation system supports all 23 scheduled languages of India:
+
+<div align="center">
+
+| Language | Native Name | | Language | Native Name |
+|:---|:---|:---:|:---|:---|
+| English | English | | Odia | ଓଡ଼ିଆ |
+| Hindi | हिंदी | | Urdu | اردو |
+| Bengali | বাংলা | | Assamese | অসমীয়া |
+| Telugu | తెలుగు | | Sindhi | سنڌي |
+| Marathi | मराठी | | Konkani | कोंकणी |
+| Tamil | தமிழ் | | Sanskrit | संस्कृतम् |
+| Gujarati | ગુજરાતી | | Santali | ᱥᱟᱱᱛᱟᱲᱤ |
+| Kannada | ಕನ್ನಡ | | Kashmiri | کٲشُر |
+| Malayalam | മലയാളം | | Manipuri | মৈতৈলোন |
+| Punjabi | ਪੰਜਾਬੀ | | Dogri | डोगरी |
+| | | | Bodo | बड़ो |
+| | | | Khasi | Khasi |
+| | | | Mizo | Mizo |
+
+</div>
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technologies |
+|:---|:---|
+| **Frontend** | Next.js 16 · React 19 · TypeScript 5 |
+| **Styling** | Tailwind CSS 4 · CSS Variables · Framer Motion |
+| **Data Viz** | Recharts · Lucide React Icons |
+| **AI/ML** | XGBoost (Risk Scoring) · GPT-4 (NLU) · Rasa NLU |
 | **Voice** | Web Speech API (TTS/STT) |
 | **State** | React Context API |
-| **Styling** | CSS Variables, Inline Styles |
-| **Build** | Turbopack |
+| **Build** | Turbopack (Next.js 16) |
+| **Internals** | Dynamic Imports · Code Splitting · Lazy Loading |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+
+- **Node.js** 18+ 
+- **npm** or **yarn**
 
 ### Installation
 
 ```bash
-# Clone the repository
-cd recover-ai
+# 1. Clone the repository
+git clone https://github.com/your-team/dhansetu.git
+cd dhansetu/recover-ai
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Run development server
+# 3. Set up environment variables
+cp .env.local.example .env.local
+# Edit .env.local with your API keys (GPT-4, etc.)
+
+# 4. Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Open **[http://localhost:3000](http://localhost:3000)** and experience the magic ✨
+
+### User Flow
+
+```
+Loading Screen → Language Selection → Bank Selection → User Details → Role Selection → Login → App
+                                                                        ↓                    ↓
+                                                                    [Admin]              [User]
+                                                                        ↓                    ↓
+                                                                  Full Dashboard        User Portal
+                                                                  (19 Modules)         (Loans, Pay,
+                                                                                       AI Support)
+```
 
 ---
 
-## 📊 Sample Data
+## 📊 Impact & Metrics
 
-The platform includes 500+ sample borrower records with:
-- Customer demographics (name, ID, language, region)
-- Loan details (product, amount, DPD, overdue amount)
-- Risk scores (XGBoost-computed)
-- Best communication channels
-- Payment history
+DhanSetu tracks and optimizes:
+
+| Metric | What We Measure |
+|:---|:---|
+| 📈 **Recovery Rate** | % improvement over traditional methods |
+| 💰 **Cost per Recovery** | Operational cost reduction |
+| ⚡ **Agent Productivity** | Accounts handled per agent per month |
+| 📱 **Channel Effectiveness** | Best-performing channels by segment |
+| 😊 **Customer Satisfaction** | Post-interaction sentiment scores |
+| ✅ **Compliance Score** | Violations prevented vs. flagged |
+| 🤖 **AI vs Human** | Automated vs manual recovery comparison |
 
 ---
 
 ## 🎨 Design System
 
 ### Color Palette
-- **Primary**: Teal (`#0d9488`)
-- **Secondary**: Green (`#16a34a`)
-- **Accent**: Gold (`#f5c842`)
-- **Background**: Warm Cream (`#fdfbf7`)
-- **Text**: Brown (`#3d2e1f`)
+
+| Color | Hex | Usage |
+|:---|:---|:---|
+| 🟢 **Primary** | `#0d9488` | Teal — Primary actions, headers |
+| 🟩 **Secondary** | `#16a34a` | Green — Success states, confirmations |
+| 🟡 **Accent** | `#f5c842` | Gold — Highlights, DhanPoints |
+| ⬜ **Background** | `#f0f4f8` | Light gray — App background |
+| ⬛ **Text** | `#0f172a` | Near-black — Primary text |
 
 ### Typography
-- **Headings**: Space Grotesk
-- **Body**: Inter / Outfit
+
+| Purpose | Font |
+|:---|:---|
+| **Headings** | Space Grotesk |
+| **Body Text** | Inter / Outfit |
+| **Monospace** | System monospace |
 
 ---
 
-## 📱 Multi-Language Support
+## 📁 Project Structure
 
-DhanSetu supports **23 Indian languages** out of the box:
-
-| Code | Language | Native Name |
-|------|----------|-------------|
-| en-IN | English | English |
-| hi-IN | Hindi | हिंदी |
-| bn-IN | Bengali | বাংলা |
-| te-IN | Telugu | తెలుగు |
-| mr-IN | Marathi | मराठी |
-| ta-IN | Tamil | தமிழ் |
-| gu-IN | Gujarati | ગુજરાતી |
-| kn-IN | Kannada | ಕನ್ನಡ |
-| ml-IN | Malayalam | മലയാളം |
-| pa-IN | Punjabi | ਪੰਜਾਬੀ |
-| or-IN | Odia | ଓଡ଼ିଆ |
-| ur-IN | Urdu | اردو |
-| as-IN | Assamese | অসমীয়া |
-| sd-IN | Sindhi | سنڌي |
-| kok | Konkani | कोंकणी |
-| sa-IN | Sanskrit | संस्कृतम् |
-| sat | Santali | ᱥᱟᱱᱛᱟᱲᱤ |
-| ksh | Kashmiri | کٲشُر |
-| mni | Manipuri | মৈতৈলোন |
-| dl | Dograri | डोगरी |
-| bxr | Bodo | बड़ो |
-| khg | Khasi | Khasi |
-| lus | Mizo | Mizo |
-
----
-
-## 📄 Compliance
-
-### RBI Guidelines Implemented
-- **Fair Practices Code** compliance in all communications
-- **Privacy Protection** - No unauthorized data sharing
-- **Gender Fairness** - Equal treatment across demographics
-- **Regional Equity** - No geographic discrimination
-- **DLT Compliance** - Distributed Ledger Technology integration
-- **Audit Logging** - Complete communication trail
-
----
-
-## 📈 Performance Metrics
-
-The platform tracks:
-- Recovery Rate improvement
-- Cost per recovery
-- Agent productivity
-- Channel effectiveness
-- Customer satisfaction scores
-- Compliance violations
+```
+recover-ai/
+├── app/
+│   ├── page.tsx              # Main app entry with multi-phase onboarding
+│   ├── layout.tsx            # Root layout with metadata
+│   ├── globals.css           # Design system & global styles
+│   └── api/                  # API routes
+├── components/
+│   ├── Dashboard.tsx         # Command Center
+│   ├── RiskEngine.tsx        # AI Risk Scoring
+│   ├── InsightsHub.tsx       # Analytics Insights
+│   ├── MessageStudio.tsx     # Multi-language Message Creator
+│   ├── AIBot.tsx             # GPT-4 Negotiation Bot
+│   ├── GandhigiriMode.tsx    # 🕊️ Gandhi-inspired Recovery
+│   ├── CampaignBuilder.tsx   # Multi-channel Campaigns
+│   ├── RecoveryToolkit.tsx   # Gamified Recovery Tools
+│   ├── Analytics.tsx         # ROI & Performance
+│   ├── ComplianceCenter.tsx  # RBI Compliance Monitor
+│   ├── SentimentAnalyzer.tsx # Borrower Sentiment AI
+│   ├── MLModelDashboard.tsx  # ML Model Monitoring
+│   ├── GeoHeatmap.tsx        # Geographic Visualization
+│   ├── PortfolioHeatmap.tsx  # Portfolio Risk Map
+│   ├── EscalationWorkflow.tsx# Tiered Escalation
+│   ├── BulkActions.tsx       # Mass Operations
+│   ├── AgentLeaderboard.tsx  # Agent Performance
+│   ├── CashFlowCalendar.tsx  # Payment Forecasting
+│   ├── ExportReports.tsx     # Report Generation
+│   ├── Customer360.tsx       # 360° Borrower View
+│   ├── UserPortal.tsx        # Borrower-Facing Portal
+│   ├── BankSelector.tsx      # Bank Selection Screen
+│   ├── BankLogin.tsx         # Bank-Branded Login
+│   ├── LoadingScreen.tsx     # Animated Loading
+│   ├── Sidebar.tsx           # Navigation Sidebar
+│   └── ...                   # + more components
+├── lib/
+│   ├── data.ts               # 500+ borrower records
+│   ├── i18n.ts               # 23-language translations (121KB!)
+│   └── context.tsx           # Global state management
+├── public/                   # Static assets
+├── package.json
+└── tsconfig.json
+```
 
 ---
 
-## 🤝 License
+## 🏆 Why DhanSetu Wins
 
-This project is proprietary software for demonstration purposes.
+<div align="center">
+
+| What Makes Us Different | Traditional Recovery | DhanSetu |
+|:---|:---:|:---:|
+| Communication Language | English Only | **23 Languages** |
+| Tone of Messaging | Threatening | **Empathetic AI** |
+| Risk Scoring | Manual Assessment | **XGBoost ML** |
+| Channel Selection | Random | **AI-Optimized** |
+| Borrower Portal | None | **Full Self-Service** |
+| Compliance | Post-Facto Audit | **Real-Time Guard** |
+| Cultural Sensitivity | Zero | **Gandhigiri Mode** 🕊️ |
+| Voice Support | None | **AI TTS/STT** |
+| Recovery Approach | Confrontation | **Conversation** |
+
+</div>
 
 ---
 
-<p align="center">
-  <strong>DhanSetu</strong> - AI-Powered Debt Recovery for Indian Banks<br>
-  Powered by GPT-4 · XGBoost · Rasa NLU
-</p>
+## 🤝 The Team
+
+Built with ❤️ for India's banking sector.
+
+---
+
+<div align="center">
+
+### 🏦 DhanSetu — *धन सेतु*
+
+**The Bridge Between Banks and Borrowers**
+
+*Powered by GPT-4 · XGBoost · Rasa NLU · 23 Indian Languages*
+
+*Recovering debts. Restoring dignity. Rebuilding trust.*
+
+---
+
+**⭐ Star this repo if DhanSetu inspired you!**
+
+</div>

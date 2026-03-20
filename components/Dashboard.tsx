@@ -16,22 +16,30 @@ function StatCard({ title, value, subtitle, icon, color, delta }: {
     const [displayed, setDisplayed] = useState('0');
 
     useEffect(() => {
-        const numStr = value.replace(/[^0-9.]/g, '');
+        const numMatch = value.match(/[\d,.]+/);
+        if (!numMatch) { setDisplayed(value); return; }
+        
+        const numStr = numMatch[0].replace(/,/g, '');
         const num = parseFloat(numStr);
         if (isNaN(num)) { setDisplayed(value); return; }
+        
+        const prefix = value.substring(0, numMatch.index);
+        const suffix = value.substring(numMatch.index! + numMatch[0].length);
+
         const duration = 1200;
         const steps = 40;
         const increment = num / steps;
         let current = 0;
+        
         const timer = setInterval(() => {
             current = Math.min(current + increment, num);
-            const prefix = value.replace(/[\d,.]+/, '').split('').filter(c => isNaN(parseInt(c)) && c !== '.').join('');
-            const formatted = value.startsWith('₹')
-                ? '₹' + Math.floor(current).toLocaleString('en-IN')
-                : value.includes('%')
-                    ? Math.round(current) + '%'
-                    : Math.floor(current).toLocaleString();
-            setDisplayed(formatted);
+            let numFormatted = '';
+            if (num % 1 !== 0 || value.includes('.')) {
+                numFormatted = current.toFixed(1);
+            } else {
+                numFormatted = Math.floor(current).toLocaleString('en-IN');
+            }
+            setDisplayed(prefix + numFormatted + suffix);
             if (current >= num) clearInterval(timer);
         }, duration / steps);
         return () => clearInterval(timer);
@@ -103,10 +111,10 @@ function RiskBadge({ tier }: { tier: string }) {
 const CustomPieTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 8, padding: '8px 12px', boxShadow: 'var(--shadow-md)' }}>
-                <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.85rem' }}>{payload[0].name}</div>
-                <div style={{ color: payload[0].payload.color, fontWeight: 700, fontSize: '0.9rem' }}>
-                    {payload[0].value}
+            <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-glow)', borderRadius: 12, padding: '10px 14px', boxShadow: 'var(--shadow-lg)', backdropFilter: 'blur(20px)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.85rem', marginBottom: 2 }}>{payload[0].name}</div>
+                <div style={{ color: payload[0].payload.color, fontWeight: 800, fontSize: '1.05rem', fontFamily: 'Space Grotesk' }}>
+                    {payload[0].value.toLocaleString()} Accounts
                 </div>
             </div>
         );
@@ -187,19 +195,18 @@ export default function Dashboard() {
                 />
                 <StatCard
                     title={t('dash.recoveryRate', lang)}
-                    value={`₹${Math.round(kpis.projectedRecovery / 10000000).toLocaleString('en-IN')} Cr`}
-                    subtitle={`${kpis.avgRecovery}% avg recovery rate`}
+                    value={`${kpis.avgRecovery}%`}
+                    subtitle={`Projected: ₹${(kpis.projectedRecovery / 10000000).toFixed(2)} Cr`}
                     icon={<svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2" style={{ width: 20, height: 20 }}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>}
                     color="#22c55e"
                     delta={{ val: '18.2%', positive: true }}
                 />
                 <StatCard
-                    title="Calculation Demo"
-                    value={(2 + 3 + 13).toString()}
-                    subtitle="2 + 3 + 13 = 18"
-                    icon={<svg viewBox="0 0 24 24" fill="none" stroke="#8b5a2b" strokeWidth="2" style={{ width: 20, height: 20 }}><rect x="4" y="2" width="16" height="20" rx="2" /><line x1="8" y1="6" x2="16" y2="6" /><line x1="8" y1="10" x2="16" y2="10" /><line x1="8" y1="14" x2="12" y2="14" /></svg>}
-                    color="#8b5a2b"
-                    delta={{ val: '100%', positive: true }}
+                    title={t('dash.highRiskAccounts', lang)}
+                    value={kpis.highCount.toLocaleString()}
+                    subtitle={`${Math.round(kpis.highCount / kpis.total * 100)}% of portfolio`}
+                    icon={<svg viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" style={{ width: 20, height: 20 }}><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>}
+                    color="#f97316"
                 />
             </div>
 
@@ -235,21 +242,21 @@ export default function Dashboard() {
                         <AreaChart data={trendData}>
                             <defs>
                                 <linearGradient id="gradAI" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#0d9488" stopOpacity={0.2} />
-                                    <stop offset="95%" stopColor="#0d9488" stopOpacity={0} />
+                                    <stop offset="5%" stopColor="var(--bank-accent)" stopOpacity={0.25} />
+                                    <stop offset="95%" stopColor="var(--bank-accent)" stopOpacity={0} />
                                 </linearGradient>
                                 <linearGradient id="gradBase" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.15} />
-                                    <stop offset="95%" stopColor="#94a3b8" stopOpacity={0} />
+                                    <stop offset="5%" stopColor="var(--text-secondary)" stopOpacity={0.15} />
+                                    <stop offset="95%" stopColor="var(--text-secondary)" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                            <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
-                            <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} unit="%" />
-                            <Tooltip formatter={(v: any) => `${Math.round(v * 10) / 10}%`} contentStyle={{ borderRadius: 8, border: '1px solid #e2e8f0', fontSize: '0.8rem' }} />
-                            <Legend wrapperStyle={{ fontSize: '0.75rem' }} />
-                            <Area type="monotone" dataKey="withAI" name="DhanSetu" stroke="#0d9488" fill="url(#gradAI)" strokeWidth={2.5} dot={false} />
-                            <Area type="monotone" dataKey="baseline" name="Baseline" stroke="#94a3b8" fill="url(#gradBase)" strokeWidth={1.5} strokeDasharray="4 3" dot={false} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                            <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} tickMargin={12} />
+                            <YAxis tick={{ fontSize: 11, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} unit="%" tickMargin={12} />
+                            <Tooltip formatter={(v: any) => `${Math.round(v * 10) / 10}%`} contentStyle={{ borderRadius: 12, border: '1px solid var(--border-glow)', fontSize: '0.85rem', background: 'var(--bg-elevated)', boxShadow: 'var(--shadow-lg)' }} />
+                            <Legend wrapperStyle={{ fontSize: '0.75rem', paddingTop: '10px' }} />
+                            <Area type="monotone" dataKey="withAI" name="DhanSetu" stroke="var(--bank-accent)" fill="url(#gradAI)" strokeWidth={3} dot={false} activeDot={{ r: 6, fill: 'var(--bank-accent)', stroke: 'var(--bg-base)', strokeWidth: 2 }} />
+                            <Area type="monotone" dataKey="baseline" name="Baseline" stroke="var(--text-secondary)" fill="url(#gradBase)" strokeWidth={2} strokeDasharray="4 3" dot={false} />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>

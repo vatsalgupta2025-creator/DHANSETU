@@ -58,9 +58,10 @@ export default function UserDetailsForm({ bank, onSubmit }: Props) {
                         width: 64, height: 64, borderRadius: '50%',
                         background: `linear-gradient(135deg, ${accentColor}, ${accent2})`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        margin: '0 auto 16px', fontSize: '1.8rem'
+                        margin: '0 auto 16px', padding: '12px',
+                        overflow: 'hidden',
                     }}>
-                        {bank?.logo || '🏦'}
+                        {bank?.logo || <span style={{ fontSize: '1.8rem' }}>🏦</span>}
                     </div>
                     <h2 style={{
                         fontFamily: 'Space Grotesk',

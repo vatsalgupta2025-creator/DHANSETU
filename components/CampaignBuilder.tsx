@@ -281,7 +281,23 @@ export default function CampaignBuilder() {
                                 ))}
                             </div>
                             <button
-                                onClick={() => setLaunched(true)}
+                                onClick={async () => {
+                                    setLaunched(true);
+                                    try {
+                                        await fetch('/api/campaigns/send', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({
+                                                campaignName: campaignName || 'Recovery Campaign',
+                                                message: 'Test message from DhanSetu',
+                                                channels: selectedChannels,
+                                                toNumbers: ['+919876543210'] // Mock number for demo
+                                            })
+                                        });
+                                    } catch (e) {
+                                        console.error('Campaign API Error:', e);
+                                    }
+                                }}
                                 style={{
                                     width: '100%', padding: '14px', background: 'linear-gradient(135deg, #0d9488, #16a34a)',
                                     color: 'white', border: 'none', borderRadius: 12, fontWeight: 800, fontSize: '1rem', cursor: 'pointer',

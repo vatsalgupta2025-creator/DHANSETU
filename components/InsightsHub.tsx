@@ -49,7 +49,9 @@ function EarlyWarning({ data }: { data: LoanRecord[] }) {
                             const level = r.loan.creditScore < 600 ? 'SEVERE' : r.loan.bounceCount6m >= 3 ? 'HIGH' : 'MODERATE';
                             const levelColors: Record<string, string> = { SEVERE: '#dc2626', HIGH: '#ea580c', MODERATE: '#d97706' };
                             return (
-                                <tr key={r.customer.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                                <tr key={r.customer.id} style={{ borderBottom: '1px solid var(--border)', transition: 'all 0.2s' }}
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-elevated)'}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
                                     <td style={{ padding: '10px 14px' }}>
                                         <div style={{ fontWeight: 600, fontSize: '0.82rem', color: '#0f172a' }}>{r.customer.name}</div>
                                         <div style={{ fontSize: '0.67rem', color: '#94a3b8' }}>{r.customer.id}</div>
@@ -316,7 +318,9 @@ function FraudDetection({ data }: { data: LoanRecord[] }) {
                         {flagged.map(r => {
                             const intentScore = Math.max(0, 100 - r.risk.upliftScore - (r.loan.creditScore > 680 ? 10 : 0) + r.loan.bounceCount6m * 5);
                             return (
-                                <tr key={r.customer.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                                <tr key={r.customer.id} style={{ borderBottom: '1px solid var(--border)', transition: 'all 0.2s' }}
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-elevated)'}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
                                     <td style={{ padding: '10px 12px' }}>
                                         <div style={{ fontWeight: 600, fontSize: '0.8rem', color: '#0f172a' }}>{r.customer.name}</div>
                                         <div style={{ fontSize: '0.65rem', color: '#94a3b8' }}>{r.customer.region}</div>
@@ -449,7 +453,9 @@ function ChannelOptimization({ data }: { data: LoanRecord[] }) {
                     </thead>
                     <tbody>
                         {topAccounts.map(acc => (
-                            <tr key={acc.name} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                            <tr key={acc.name} style={{ borderBottom: '1px solid var(--border)', transition: 'all 0.2s' }}
+                                onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-elevated)'}
+                                onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
                                 <td style={{ padding: '9px 14px', fontWeight: 600, fontSize: '0.82rem', color: '#0f172a' }}>{acc.name}</td>
                                 <td style={{ padding: '9px 14px', fontSize: '0.75rem', color: '#0d9488', fontWeight: 700, textTransform: 'capitalize' }}>{acc.channel === 'whatsapp' ? '📱 WhatsApp' : acc.channel === 'call' ? '📞 Call' : acc.channel === 'sms' ? '💬 SMS' : '📧 Email'}</td>
                                 <td style={{ padding: '9px 14px', fontSize: '0.78rem', color: '#475569', fontWeight: 600 }}>{acc.day}</td>

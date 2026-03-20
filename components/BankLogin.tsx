@@ -198,99 +198,90 @@ export default function BankLogin({ bank, role, userName, onLogin, onBack }: Pro
 
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: 28 }}>
-                    <div style={{
-                        width: 64, height: 64, borderRadius: '50%',
-                        background: `linear-gradient(135deg, ${accentColor}, ${accent2})`,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        margin: '0 auto 16px', fontSize: '1.8rem'
+                    <div className="glass-card" style={{
+                        width: '100%', maxWidth: 440, padding: 36, textAlign: 'center',
+                        position: 'relative', overflow: 'hidden',
                     }}>
-                        {forgotStep === 0 ? (bank?.logo || '🏦') : forgotStep === 1 ? '📧' : forgotStep === 2 ? '🔢' : '🔐'}
+                        {/* Glowing Bank Accent Line */}
+                        <div style={{
+                            position: 'absolute', top: 0, left: 0, right: 0, height: 4,
+                            background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`,
+                            opacity: 0.8,
+                        }} />
+                        {forgotStep === 0 ? (bank?.logo || <span style={{ fontSize: '1.8rem' }}>🏦</span>) :
+                            forgotStep === 1 ? <span style={{ fontSize: '1.8rem' }}>📧</span> :
+                                forgotStep === 2 ? <span style={{ fontSize: '1.8rem' }}>🔢</span> :
+                                    <span style={{ fontSize: '1.8rem' }}>🔐</span>}
                     </div>
-                    <h2 style={{
-                        fontFamily: 'Space Grotesk',
-                        fontSize: '1.4rem', fontWeight: 800,
-                        color: '#3d2b1f', marginBottom: 6,
+                    <div style={{
+                        fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-primary)',
+                        fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em',
                     }}>
-                        {forgotStep === 0 ? `${bank?.shortName || 'Bank'} ${role === 'admin' ? 'Admin' : 'User'} Login`
-                            : forgotStep === 1 ? 'Forgot Password'
-                                : forgotStep === 2 ? 'Verify OTP'
-                                    : 'Reset Password'}
-                    </h2>
-                    <p style={{ color: '#8b7355', fontSize: '0.85rem' }}>
-                        {forgotStep === 0 ? `Welcome, ${userName}`
-                            : forgotStep === 1 ? 'Enter your registered email or phone'
-                                : forgotStep === 2 ? `Enter the OTP sent to your ${fpEmail.includes('@') ? 'email' : 'phone'}`
-                                    : 'Create a new secure password'}
-                    </p>
+                        {forgotStep === 1 ? 'Reset Password'
+                            : forgotStep === 2 ? 'Verify OTP'
+                            : forgotStep === 3 ? 'New Password'
+                            : bank?.shortName ? `${bank.shortName} Portal` : 'Secure Login'}
+                    </div>
+                    <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: 6, fontWeight: 500 }}>
+                        {forgotStep === 1 ? 'Enter your registered email or phone'
+                            : forgotStep === 2 ? `Enter the OTP sent to your ${fpEmail.includes('@') ? 'email' : 'phone'}`
+                            : forgotStep === 3 ? 'Create a strong new password'
+                            : `Welcome back, ${userName}`}
+                    </div>
                 </div>
 
                 {/* === LOGIN FORM === */}
                 {forgotStep === 0 && (
                     <>
-                        <div style={{
-                            background: `${accentColor}12`, border: `1px solid ${accentColor}25`,
-                            borderRadius: 10, padding: '12px 16px', marginBottom: 24,
-                        }}>
-                            <div style={{ fontSize: '0.75rem', color: accentColor, fontWeight: 600, marginBottom: 2 }}>
-                                💡 Login Hint
-                            </div>
-                            <div style={{ fontSize: '0.8rem', color: '#6b5344' }}>{hint}</div>
-                        </div>
-
-                        <form onSubmit={handleSubmit}>
-                            <div style={{ marginBottom: 18 }}>
-                                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#3d2b1f', marginBottom: 6 }}>
-                                    User ID / Employee ID *
-                                </label>
-                                <input type="text" value={userId}
-                                    onChange={(e) => { setUserId(e.target.value); setError(''); }}
-                                    placeholder={role === 'admin' ? "admin@bank.in" : "EMP123456"}
-                                    style={inputStyle(!!error)}
-                                    onFocus={(e) => { e.target.style.borderColor = accentColor; }}
-                                    onBlur={(e) => { e.target.style.borderColor = error ? '#dc2626' : 'rgba(139, 90, 43, 0.2)'; }}
+                        <div className="hover-lift" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                            <div>
+                                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textAlign: 'left', marginBottom: 6 }}>
+                                    Employee ID / Username
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder={`Enter your ${bank?.shortName || ''} ID`}
+                                    value={userId}
+                                    onChange={e => setUserId(e.target.value)}
+                                    style={{
+                                        width: '100%', padding: '12px 16px', background: 'var(--bg-base)',
+                                        border: `1px solid var(--border)`, borderRadius: 12,
+                                        fontSize: '0.92rem', color: 'var(--text-primary)', fontWeight: 500,
+                                    }}
                                 />
                             </div>
-
-                            <div style={{ marginBottom: 24 }}>
-                                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#3d2b1f', marginBottom: 6 }}>
-                                    Password *
-                                </label>
-                                <div style={{ position: 'relative' }}>
-                                    <input type={showPassword ? "text" : "password"} value={password}
-                                        onChange={(e) => { setPassword(e.target.value); setError(''); }}
-                                        placeholder="Enter your password"
-                                        style={{ ...inputStyle(!!error), paddingRight: 48 }}
-                                        onFocus={(e) => { e.target.style.borderColor = accentColor; }}
-                                        onBlur={(e) => { e.target.style.borderColor = error ? '#dc2626' : 'rgba(139, 90, 43, 0.2)'; }}
-                                    />
-                                    <button type="button" onClick={() => setShowPassword(!showPassword)}
-                                        style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: '#8b7355' }}>
-                                        {showPassword ? '🙈' : '👁️'}
-                                    </button>
+                            <div style={{ position: 'relative' }}>
+                                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textAlign: 'left', marginBottom: 6 }}>
+                                    Password
                                 </div>
+                                <input
+                                    type="password"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    onKeyDown={e => e.key === 'Enter' && !!userId && !!password && handleSubmit(e)}
+                                    style={{
+                                        width: '100%', padding: '12px 16px', background: 'var(--bg-base)',
+                                        border: `1px solid var(--border)`, borderRadius: 12,
+                                        fontSize: '0.92rem', color: 'var(--text-primary)', fontWeight: 500,
+                                    }}
+                                />
                             </div>
+                        </div>
 
-                            {error && (
-                                <div style={{ color: '#dc2626', fontSize: '0.85rem', marginBottom: 16, textAlign: 'center', padding: '10px', background: '#fef2f2', borderRadius: 8 }}>
-                                    {error}
-                                </div>
-                            )}
-
-                            <button type="submit" style={{
-                                width: '100%', padding: '16px',
-                                background: `linear-gradient(135deg, ${accentColor}, ${accent2})`,
-                                color: 'white', border: 'none', borderRadius: 12,
-                                fontWeight: 700, fontSize: '1rem', cursor: 'pointer',
-                                fontFamily: 'Space Grotesk',
-                                boxShadow: `0 6px 20px ${accentColor}40`,
-                                transition: 'all 0.2s',
+                        <button
+                            onClick={handleSubmit}
+                            disabled={!userId || !password || false} // Assuming no isLoading state for login
+                            className="btn-accent"
+                            style={{
+                                width: '100%', marginTop: 24, padding: '12px', fontSize: '1rem',
+                                borderRadius: 12, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8,
+                                opacity: (!userId || !password) ? 0.6 : 1,
+                                cursor: (!userId || !password) ? 'not-allowed' : 'pointer',
                             }}
-                                onMouseEnter={(e) => { (e.target as HTMLButtonElement).style.transform = 'translateY(-2px)'; }}
-                                onMouseLeave={(e) => { (e.target as HTMLButtonElement).style.transform = 'translateY(0)'; }}
-                            >
-                                Login to {bank?.shortName || 'Portal'} →
-                            </button>
-                        </form>
+                        >
+                            Login
+                        </button>
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(139, 90, 43, 0.1)' }}>
                             <span style={{ fontSize: '0.75rem', color: '#8b7355' }}>🔒 Secure SSL Connection</span>
