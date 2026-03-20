@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DhanSetu — AI Debt Recovery Platform | Hackathon Pitch</title>
 <link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
 <body>
 
@@ -71,18 +72,21 @@
   <div style="text-align:center;width:100%">
     <h2><span class="dot"></span>How DhanSetu Works</h2>
     <p class="subtitle">AI automates and optimizes the entire debt recovery workflow</p>
-    <div class="flow" style="margin-top:40px">
-      <div class="flow-box glass"><h4>📥 Data Ingestion</h4><p>500+ borrower records, bank configs</p></div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-box glass"><h4>🧠 XGBoost Scoring</h4><p>30/60/90-day default probability</p></div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-box glass"><h4>🎯 AI Segmentation</h4><p>Risk tiers & channel selection</p></div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-box glass"><h4>✉️ Smart Outreach</h4><p>12 languages, 4 tones, 4 channels</p></div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-box glass"><h4>🤖 AI Negotiation</h4><p>GPT-4 powered conversations</p></div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-box glass"><h4>📈 Recovery</h4><p>Track ROI & optimize</p></div>
+    <div class="mermaid-container" style="margin:20px auto;max-width:1000px;background:rgba(255,255,255,0.03);padding:10px 20px;border-radius:16px;border:1px solid rgba(255,255,255,0.1)">
+      <div class="mermaid" style="zoom: 1.25">
+        %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e1b4b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#8b5cf6', 'lineColor': '#06b6d4', 'fontFamily': 'Space Grotesk' }}}%%
+        graph TD
+          A[<b>🏦 Bank CRM System</b><br/>NPAs & Metadata] -->|API Push| B(<b>🧠 XGBoost ML Engine</b><br/>Risk Scoring & Segmentation)
+          B -->|High Risk| C[<b>⚡ Accelerated Handling</b><br/>Pre-Default Flagging]
+          B -->|Med/Low Risk| D{<b>🤖 Multi-Agent Orchestration</b>}
+          D -->|Language Sync| E[<b>🌐 Smart NLP Translator</b><br/>12 Native Dialects]
+          D -->|Tone Sync| F[<b>🕊️ Gandhigiri Emotion AI</b><br/>Empathy-Driven Dialog]
+          E --> G
+          F --> G(<b>💬 Twilio Campaign Pipeline</b>)
+          G -->|WhatsApp/SMS| H{<b>📱 Negotiation GPT Bot</b>}
+          H -->|Promises to Pay| I[<b>💳 Zero-Friction Payment Node</b><br/>One-Click EMIs]
+          I -->|Payment Verified| J[<b>✅ Compliant Recovery</b><br/>Logged securely]
+      </div>
     </div>
   </div>
   <span class="slide-num">04 / 12</span>
